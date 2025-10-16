@@ -1,11 +1,23 @@
 Package: sva
 Title: Surrogate Variable Analysis
 Version: 3.35.2
-Author: Jeffrey T. Leek <jtleek@gmail.com>, W. Evan Johnson <wej@bu.edu>,
-    Hilary S. Parker <hiparker@jhsph.edu>, Elana J. Fertig <ejfertig@jhmi.edu>,
-    Andrew E. Jaffe <ajaffe@jhsph.edu>, Yuqing Zhang <zhangyuqing.pkusms@gmail.com>, 
-    John D. Storey <jstorey@princeton.edu>, 
-    Leonardo Collado Torres <lcolladotor@gmail.com>
+Date: 2025-10-15
+Authors@R: c(
+    person("Jessica", "Anderson", , "anderson.jessica@rutgers.edu", 
+    role = c("ctr", "cre"), comment = c(ORCID = "0000-0002-0542-9872")),
+    person("W. Evan", "Johnson", , "wj183@njms.rutgers.edu", role = c("aut"),
+    comment = c(ORCID = "0000-0002-6247-6595")),
+    person("Jeffrey T.", "Leek", , "jtleek@gmail.com", role = c("aut", "fnd")),
+    person("Hilary S.", "Parker", , "hiparker@jhsph.edu", role = c("aut")),
+    person("Elana J.", "Fertig", , "ejfertig@jhmi.edu>", role = c("ctr")),
+    person("Andrew E.", "Jaffe", , "ajaffe@jhsph.edu", role = c("aut")),
+    person("Yuqing", "Zhang", , "zhangyuqing.pkusms@gmail.com",
+    role = c("ctr")), 
+    person("John D.", "Storey", , "jstorey@princeton.edu",
+    role = c("aut", "fnd")), 
+    person("Leonardo", "Collado Torres", , "lcolladotor@gmail.com",
+    role = c("aut"))
+    )
 Description: The sva package contains functions for removing batch
     effects and other unwanted variation in high-throughput
     experiment. Specifically, the sva package contains functions
@@ -26,15 +38,17 @@ Description: The sva package contains functions for removing batch
     dependence, stabilize error rate estimates, and improve
     reproducibility, see (Leek and Storey 2007 PLoS Genetics, 2008
     PNAS or Leek et al. 2011 Nat. Reviews Genetics).
-Maintainer: Jeffrey T. Leek <jtleek@gmail.com>, John D. Storey
-    <jstorey@princeton.edu>, W. Evan Johnson <wej@bu.edu>
+License: Artistic-2.0
+URL: https://github.com/jessmcc22/sva
+BugReports: https://github.com/jessmcc22/sva/issues
 Depends:
-    R (>= 3.2),
+    R (>= 4.5.0),
     mgcv,
     genefilter,
     BiocParallel
 Imports:
     matrixStats,
+    methods,
     stats,
     graphics,
     utils,
@@ -46,7 +60,7 @@ Suggests:
     BiocStyle,
     zebrafishRNASeq,
     testthat
-License: Artistic-2.0
 biocViews: ImmunoOncology, Microarray, StatisticalMethod, Preprocessing,
     MultipleComparison, Sequencing, RNASeq, BatchEffect, Normalization
-RoxygenNote: 7.0.2
+RoxygenNote: 7.3.3
+Encoding: UTF-8
