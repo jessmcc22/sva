@@ -2,7 +2,7 @@
 % Please edit documentation in R/ComBat_seq.R
 \name{ComBat_seq}
 \alias{ComBat_seq}
-\title{Adjust for batch effects using an empirical Bayes framework in RNA-seq raw counts}
+\title{Adjust for batch effects w/an empirical Bayes framework in RNA-seq raw counts}
 \usage{
 ComBat_seq(
   counts,
@@ -16,13 +16,15 @@ ComBat_seq(
 )
 }
 \arguments{
-\item{counts}{Raw count matrix from genomic studies (dimensions gene x sample)}
+\item{counts}{Raw count matrix from genomic studies (dimensions gene x
+sample)}
 
 \item{batch}{Vector / factor for batch}
 
 \item{group}{Vector / factor for biological condition of interest}
 
-\item{covar_mod}{Model matrix for multiple covariates to include in linear model (signals from these variables are kept in data after adjustment)}
+\item{covar_mod}{Model matrix for multiple covariates to include in linear
+model (signals from these variables are kept in data after adjustment)}
 
 \item{full_mod}{Boolean, if TRUE include condition of interest in model}
 
@@ -30,14 +32,15 @@ ComBat_seq(
 
 \item{shrink.disp}{Boolean, whether to apply shrinkage on dispersion}
 
-\item{gene.subset.n}{Number of genes to use in empirical Bayes estimation, only useful when shrink = TRUE}
+\item{gene.subset.n}{Number of genes to use in empirical Bayes estimation,
+only useful when shrink = TRUE}
 }
 \value{
 data A gene x sample count matrix, adjusted for batch effects.
 }
 \description{
-ComBat_seq is an improved model from ComBat using negative binomial regression, 
-which specifically targets RNA-Seq count data.
+ComBat_seq is an improved model from ComBat using negative binomial
+regression, which specifically targets RNA-Seq count data.
 }
 \examples{
 
@@ -46,9 +49,15 @@ batch <- c(rep(1, 4), rep(2, 4))
 group <- rep(c(0,1), 4)
 
 # include condition (group variable)
-adjusted_counts <- ComBat_seq(count_matrix, batch=batch, group=group, full_mod=TRUE)
+adjusted_counts <- ComBat_seq(count_matrix,
+  batch=batch,
+  group=group, 
+  full_mod=TRUE)
 
 # do not include condition
-adjusted_counts <- ComBat_seq(count_matrix, batch=batch, group=NULL, full_mod=FALSE)
+adjusted_counts <- ComBat_seq(count_matrix,
+  batch=batch,
+  group=NULL,
+  full_mod=FALSE)
 
 }

@@ -2,26 +2,30 @@
 % Please edit documentation in R/psva.R
 \name{psva}
 \alias{psva}
-\title{A function for estimating surrogate variables with the two step approach of Leek and Storey 2007}
+\title{A function for estimating surrogate variables with the two step approach of
+Leek and Storey 2007}
 \usage{
 psva(dat, batch, ...)
 }
 \arguments{
-\item{dat}{The transformed data matrix with the variables in rows and samples in columns}
+\item{dat}{The transformed data matrix with the variables in rows and samples
+in columns}
 
 \item{batch}{A factor variable giving the known batch levels}
 
 \item{...}{Other arguments to the \code{\link{sva}} function.}
 }
 \value{
-psva.D Data with batch effect removed but biological heterogeneity preserved
+psva.D Data with batch effect removed but biological heterogeneity
+  preserved
 }
 \description{
-This function is the implementation of the two step approach for estimating surrogate
-variables proposed by Leek and Storey 2007 PLoS Genetics. This function is primarily
-included for backwards compatibility. Newer versions of the sva algorithm are available
-through \code{\link{sva}}, \code{\link{svaseq}}, with low level functionality available
-through \code{\link{irwsva.build}} and \code{\link{ssva}}.
+This function is the implementation of the two step approach for estimating
+surrogate variables proposed by Leek and Storey 2007 PLoS Genetics. This
+function is primarily included for backwards compatibility. Newer versions
+of the sva algorithm are available through \code{\link{sva}},
+\code{\link{svaseq}}, with low level functionality available through 
+\code{\link{irwsva.build}} and \code{\link{ssva}}.
 }
 \examples{
 

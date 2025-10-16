@@ -1,12 +1,10 @@
-library(BiocParallel) 
-
 sva.class2Model <- function(classes) {
-  return(model.matrix(~factor(classes)))
+    return(model.matrix(~factor(classes)))
 }
 
 
 modefunc <- function(x) {
-  return(as.numeric(names(sort(-table(x)))[1]))
+    return(as.numeric(names(sort(-table(x)))[1]))
 }
 
 mono <- function(lfdr){

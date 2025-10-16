@@ -7,7 +7,8 @@
 fstats(dat, mod, mod0)
 }
 \arguments{
-\item{dat}{The transformed data matrix with the variables in rows and samples in columns}
+\item{dat}{The transformed data matrix with the variables in rows and samples
+in columns}
 
 \item{mod}{The model matrix being used to fit the data}
 
@@ -19,8 +20,8 @@ fstats A vector of F-statistics one for each row of dat.
 \description{
 This function does simple linear algebra to calculate f-statistics
 for each row of a data matrix comparing the nested models
-defined by the design matrices for the alternative (mod) and and null (mod0) cases.
-The columns of mod0 must be a subset of the columns of mod.
+defined by the design matrices for the alternative (mod) and and null (mod0)
+cases. The columns of mod0 must be a subset of the columns of mod.
 }
 \examples{
 library(bladderbatch)

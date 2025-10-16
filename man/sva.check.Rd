@@ -8,7 +8,8 @@ degenerate cases.}
 sva.check(svaobj, dat, mod, mod0)
 }
 \arguments{
-\item{svaobj}{The transformed data matrix with the variables in rows and samples in columns}
+\item{svaobj}{The transformed data matrix with the variables in rows and
+samples in columns}
 
 \item{dat}{The data set that was used to build the surrogate variables}
 
@@ -19,9 +20,11 @@ sva.check(svaobj, dat, mod, mod0)
 \value{
 sv The estimated surrogate variables, one in each column
 
-pprob.gam: A vector of the posterior probabilities each gene is affected by heterogeneity
+pprob.gam: A vector of the posterior probabilities each gene is
+  affected by heterogeneity
 
-pprob.b A vector of the posterior probabilities each gene is affected by mod
+pprob.b A vector of the posterior probabilities each gene is
+  affected by mod
 
 n.sv The number of significant surrogate variables
 }
@@ -30,7 +33,8 @@ This function is designed to check for degenerate cases in the
 sva fit and fix the sva object where possible.
 }
 \details{
-\code{\link{empirical.controls}} for a direct estimate of the empirical controls.
+\code{\link{empirical.controls}} for a direct estimate of the empirical
+controls.
 }
 \examples{
 library(bladderbatch)

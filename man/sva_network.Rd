@@ -7,12 +7,14 @@
 sva_network(dat, n.pc)
 }
 \arguments{
-\item{dat}{The uncorrected normalized gene expression data matrix with samples in rows and genes in columns}
+\item{dat}{The uncorrected normalized gene expression data matrix with
+samples in rows and genes in columns}
 
 \item{n.pc}{The number of principal components to remove}
 }
 \value{
-dat.adjusted Cleaned gene expression data matrix with the top prinicpal components removed
+dat.adjusted Cleaned gene expression data matrix with the top
+  prinicpal components removed
 }
 \description{
 This function corrects a gene expression matrix prior to network inference by

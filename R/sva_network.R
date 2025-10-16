@@ -5,10 +5,12 @@
 #' The number of principal components to remove can be determined using a 
 #' permutation-based approach using the "num.sv" function with method = "be"
 
-#' @param dat The uncorrected normalized gene expression data matrix with samples in rows and genes in columns
+#' @param dat The uncorrected normalized gene expression data matrix with
+#'   samples in rows and genes in columns
 #' @param n.pc The number of principal components to remove 
 
-#' @return dat.adjusted Cleaned gene expression data matrix with the top prinicpal components removed
+#' @return dat.adjusted Cleaned gene expression data matrix with the top
+#'   prinicpal components removed
 #' 
 #' @examples 
 #' library(bladderbatch)
@@ -23,12 +25,12 @@
 #' 
 #' @export
 #' 
-sva_network=function(dat, n.pc){
-	ss<-svd(dat - colMeans(dat))
-
-	dat.adjusted=dat
-	for (i in seq_len(dim(dat)[2])) {
-  		dat.adjusted[,i]<- lm(dat[,i] ~ ss$u[,1:n.pc])$residuals
-	}
-	return(dat.adjusted)
+sva_network <- function(dat, n.pc){
+    ss <- svd(dat - colMeans(dat))
+    
+    dat.adjusted <- dat
+    for (i in seq_len(dim(dat)[2])) {
+        dat.adjusted[,i]<- lm(dat[,i] ~ ss$u[,seq_len(n.pc)])$residuals
+    }
+    return(dat.adjusted)
 }

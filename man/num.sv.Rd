@@ -2,18 +2,21 @@
 % Please edit documentation in R/num.sv.R
 \name{num.sv}
 \alias{num.sv}
-\title{A function for calculating the number of surrogate variables to estimate in a model}
+\title{A function for calculating the number of surrogate variables to estimate in
+a model}
 \usage{
 num.sv(dat, mod, method = c("be", "leek"), vfilter = NULL, B = 20, seed = NULL)
 }
 \arguments{
-\item{dat}{The transformed data matrix with the variables in rows and samples in columns}
+\item{dat}{The transformed data matrix with the variables in rows and samples
+in columns}
 
 \item{mod}{The model matrix being used to fit the data}
 
 \item{method}{One of "be" or "leek" as described in the details section}
 
-\item{vfilter}{You may choose to filter to the vfilter most variable rows before performing the analysis}
+\item{vfilter}{You may choose to filter to the vfilter most variable rows
+before performing the analysis}
 
 \item{B}{The number of permutaitons to use if method = "be"}
 
@@ -23,10 +26,11 @@ num.sv(dat, mod, method = c("be", "leek"), vfilter = NULL, B = 20, seed = NULL)
 n.sv The number of surrogate variables to use in the sva software
 }
 \description{
-This function estimates the number of surrogate variables that should be included
-in a differential expression model. The default approach is based on a permutation
-procedure originally prooposed by Buja and Eyuboglu 1992. The function also provides
-an interface to the asymptotic approach proposed by Leek 2011 Biometrics.
+This function estimates the number of surrogate variables that should be
+included in a differential expression model. The default approach is based
+on a permutation procedure originally prooposed by Buja and Eyuboglu 1992.
+The function also provides an interface to the asymptotic approach proposed
+by Leek 2011 Biometrics.
 }
 \examples{
 library(bladderbatch)
