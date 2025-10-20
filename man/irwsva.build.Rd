@@ -37,11 +37,11 @@ library(bladderbatch)
 data(bladderdata)
 dat <- bladderEset[1:5000,]
 
-pheno = pData(dat)
-edata = exprs(dat)
-mod = model.matrix(~as.factor(cancer), data=pheno)
+pheno <- pData(dat)
+edata <- exprs(dat)
+mod <- model.matrix(~as.factor(cancer), data=pheno)
 
-n.sv = num.sv(edata,mod,method="leek")
-res <- irwsva.build(edata, mod, mod0 = NULL,n.sv,B=5) 
+n.sv <- num.sv(edata,mod,method="leek")
+res <- irwsva.build(edata, mod, mod0 = NULL, n.sv, B = 5) 
 
 }

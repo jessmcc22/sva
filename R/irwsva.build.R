@@ -21,17 +21,17 @@
 #' data(bladderdata)
 #' dat <- bladderEset[1:5000,]
 #' 
-#' pheno = pData(dat)
-#' edata = exprs(dat)
-#' mod = model.matrix(~as.factor(cancer), data=pheno)
+#' pheno <- pData(dat)
+#' edata <- exprs(dat)
+#' mod <- model.matrix(~as.factor(cancer), data=pheno)
 #' 
-#' n.sv = num.sv(edata,mod,method="leek")
-#' res <- irwsva.build(edata, mod, mod0 = NULL,n.sv,B=5) 
+#' n.sv <- num.sv(edata,mod,method="leek")
+#' res <- irwsva.build(edata, mod, mod0 = NULL, n.sv, B = 5) 
 #' 
 #' @export
 #' 
 
-irwsva.build <- function(dat, mod, mod0 = NULL,n.sv,B=5) {
+irwsva.build <- function(dat, mod, mod0 = NULL, n.sv, B = 5) {
     
     n <- ncol(dat)
     m <- nrow(dat)
@@ -51,9 +51,9 @@ irwsva.build <- function(dat, mod, mod0 = NULL,n.sv,B=5) {
     rm(resid)
     
     cat(paste("Iteration (out of", B,"):"))
-    for(i in 1:B){
-        mod.b <- cbind(mod,uu$vectors[,1:n.sv])
-        mod0.b <- cbind(mod0,uu$vectors[,1:n.sv])
+    for(i in seq_len(B)){
+        mod.b <- cbind(mod,uu$vectors[,seq_len(n.sv)])
+        mod0.b <- cbind(mod0,uu$vectors[,seq_len(n.sv)])
         ptmp <- f.pvalue(dat,mod.b,mod0.b)
         pprob.b <- (1-edge.lfdr(ptmp))
         
@@ -68,7 +68,7 @@ irwsva.build <- function(dat, mod, mod0 = NULL,n.sv,B=5) {
         cat(paste(i," "))
     }
     
-    sv = svd(dats)$v[,1:n.sv, drop=FALSE]
+    sv <- svd(dats)$v[,seq_len(n.sv), drop=FALSE]
     retval <- list(sv=sv,pprob.gam = pprob.gam, pprob.b=pprob.b,n.sv=n.sv)
     return(retval)
     

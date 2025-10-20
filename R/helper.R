@@ -55,7 +55,7 @@ edge.lfdr <- function(p, trunc=TRUE, monotone=TRUE, transf=c("probit", "logit"),
 trim.dat <- function(dat){
     tmp <- strsplit(colnames(dat),'\\.')
     tr <- NULL
-    for (i in 1:length(tmp)) {
+    for (i in seq_len(length(tmp))) {
         tr <- c(tr, tmp[[i]][1] != 'X')
     }
     tr
@@ -123,7 +123,7 @@ L <- function(x,g.hat,d.hat){
 int.eprior <- function(sdat, g.hat, d.hat){
     g.star <- d.star <- NULL
     r <- nrow(sdat)
-    for(i in 1:r){
+    for(i in seq_len(r)){
         g <- g.hat[-i]
         d <- d.hat[-i]		
         x <- sdat[i,!is.na(sdat[i,])]
