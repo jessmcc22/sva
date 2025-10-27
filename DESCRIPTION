@@ -47,19 +47,22 @@ Depends:
     genefilter,
     BiocParallel
 Imports:
+    edgeR,
+    graphics,
+    limma,
     matrixStats,
     methods,
     stats,
-    graphics,
-    utils,
-    limma,
-    edgeR
+    utils
 Suggests:
-    pamr,
-    bladderbatch,
     BiocStyle,
-    zebrafishRNASeq,
-    testthat
+    bladderbatch,
+    knitr,
+    pamr,
+    testthat,
+    zebrafishRNASeq
+VignetteBuilder: 
+    knitr
 biocViews: ImmunoOncology, Microarray, StatisticalMethod, Preprocessing,
     MultipleComparison, Sequencing, RNASeq, BatchEffect, Normalization
 RoxygenNote: 7.3.3
