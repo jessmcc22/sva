@@ -133,7 +133,7 @@ int.eprior <- function(sdat, g.hat, d.hat){
         resid2 <- (dat-g)^2
         sum2 <- resid2 %*% j
         LH <- 1/(2*pi*d)^(n/2)*exp(-sum2/(2*d))
-        LH[LH=="NaN"]=0
+        LH[LH=="NaN"] <- 0
         g.star <- c(g.star, sum(g*LH)/sum(LH))
         d.star <- c(d.star, sum(d*LH)/sum(LH))
         ## if(i%%1000==0){cat(i,'\n')}

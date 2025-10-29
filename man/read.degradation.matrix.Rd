@@ -39,23 +39,23 @@ degradation matrix for subsequent RNA quality correction
 }
 \examples{
 # bwtool
-bwPath = system.file('extdata', 'bwtool', package = 'sva')
-degCovAdj = read.degradation.matrix(
+bwPath <- system.file('extdata', 'bwtool', package = 'sva')
+degCovAdj <- read.degradation.matrix(
  covFiles = list.files(bwPath,full.names=TRUE),
  sampleNames = list.files(bwPath), readLength = 76, 
  totalMapped = rep(100e6,5),type="bwtool")
  head(degCovAdj)
  
 # region_matrix: each sample
-r1Path = system.file('extdata', 'region_matrix_one', package = 'sva')
-degCovAdj1 = read.degradation.matrix(
+r1Path <- system.file('extdata', 'region_matrix_one', package = 'sva')
+degCovAdj1 <- read.degradation.matrix(
  covFiles = list.files(r1Path,full.names=TRUE),
  sampleNames = list.files(r1Path), readLength = 76, 
  totalMapped = rep(100e6,5),type="region_matrix_single")
  head(degCovAdj1)
  
-r2Path = system.file('extdata', 'region_matrix_all', package = 'sva')
-degCovAdj2 = read.degradation.matrix(
+r2Path <- system.file('extdata', 'region_matrix_all', package = 'sva')
+degCovAdj2 <- read.degradation.matrix(
  covFiles = list.files(r2Path,full.names=TRUE),
  sampleNames = list.files(r1Path), readLength = 76, 
  totalMapped = rep(100e6,5),type="region_matrix_all")

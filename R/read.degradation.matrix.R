@@ -18,23 +18,23 @@
 #'
 #' @examples 
 #' # bwtool
-#' bwPath = system.file('extdata', 'bwtool', package = 'sva')
-#' degCovAdj = read.degradation.matrix(
+#' bwPath <- system.file('extdata', 'bwtool', package = 'sva')
+#' degCovAdj <- read.degradation.matrix(
 #'  covFiles = list.files(bwPath,full.names=TRUE),
 #'  sampleNames = list.files(bwPath), readLength = 76, 
 #'  totalMapped = rep(100e6,5),type="bwtool")
 #'  head(degCovAdj)
 #'  
 #' # region_matrix: each sample
-#' r1Path = system.file('extdata', 'region_matrix_one', package = 'sva')
-#' degCovAdj1 = read.degradation.matrix(
+#' r1Path <- system.file('extdata', 'region_matrix_one', package = 'sva')
+#' degCovAdj1 <- read.degradation.matrix(
 #'  covFiles = list.files(r1Path,full.names=TRUE),
 #'  sampleNames = list.files(r1Path), readLength = 76, 
 #'  totalMapped = rep(100e6,5),type="region_matrix_single")
 #'  head(degCovAdj1)
 #'  
-#' r2Path = system.file('extdata', 'region_matrix_all', package = 'sva')
-#' degCovAdj2 = read.degradation.matrix(
+#' r2Path <- system.file('extdata', 'region_matrix_all', package = 'sva')
+#' degCovAdj2 <- read.degradation.matrix(
 #'  covFiles = list.files(r2Path,full.names=TRUE),
 #'  sampleNames = list.files(r1Path), readLength = 76, 
 #'  totalMapped = rep(100e6,5),type="region_matrix_all")
@@ -42,8 +42,11 @@
 #' 
 #' @export
 
-read.degradation.matrix <- function(covFiles, sampleNames,
-	totalMapped, readLength= 100, normFactor = 80e6,
+read.degradation.matrix <- function(covFiles, 
+    sampleNames,
+	totalMapped, 
+    readLength = 100, 
+    normFactor = 80e6,
 	type = c("bwtool","region_matrix_single","region_matrix_all"),
 	BPPARAM = bpparam()) {
 	
@@ -55,30 +58,33 @@ read.degradation.matrix <- function(covFiles, sampleNames,
 	
 	## read in data
 	if(type == "bwtool") { # bwtool output
-		degCov = bplapply(covFiles, read.delim,
-			as.is=TRUE, colClasses = c(rep("NULL",9),
-				"numeric"),header=TRUE,BPPARAM=BPPARAM)
-		degCovMat =do.call("cbind",degCov)	
-		colnames(degCovMat) = sampleNames
+		degCov <- bplapply(covFiles, 
+		    read.delim,
+			as.is = TRUE,
+		    colClasses = c(rep("NULL",9), "numeric"),
+		    header = TRUE,
+		    BPPARAM = BPPARAM)
+		degCovMat <- do.call("cbind",degCov)	
+		colnames(degCovMat) <- sampleNames
 	} else if(type == "region_matrix_single") { # region w/ manifest
-		degCov = bplapply(covFiles, read.delim,
+		degCov <- bplapply(covFiles, read.delim,
 			as.is=TRUE,header=TRUE,row.names=1,BPPARAM=BPPARAM)
-		degCov = lapply(degCov,as.numeric)
-		degCovMat =do.call("cbind",degCov)	
-		colnames(degCovMat) = sampleNames
+		degCov <- lapply(degCov,as.numeric)
+		degCovMat <- do.call("cbind",degCov)	
+		colnames(degCovMat) <- sampleNames
 	} else if(type == "region_matrix_all") { # region w/ individual file
-		degCov = read.delim(covFiles, as.is=TRUE,row.names=1)
-		degCovMat = t(as.matrix(degCov))
-		colnames(degCovMat) = sampleNames
+		degCov <- read.delim(covFiles, as.is=TRUE,row.names=1)
+		degCovMat <- t(as.matrix(degCov))
+		colnames(degCovMat) <- sampleNames
 	} else stop("type must be 'bwtool','region_matrix_single','region_matrix_all'")
 	
 		
 	## normalize for library size and read length
-	degCovMat = degCovMat/readLength # read length
-	bg = matrix(rep(totalMapped/normFactor), 
+	degCovMat <- degCovMat/readLength # read length
+	bg <- matrix(rep(totalMapped/normFactor), 
 		ncol = ncol(degCovMat), 
 		nrow = nrow(degCovMat), byrow=TRUE)
-	degCovAdj = degCovMat/bg
+	degCovAdj <- degCovMat/bg
 	
 	# return
 	return(degCovAdj)

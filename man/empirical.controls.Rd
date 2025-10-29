@@ -38,11 +38,11 @@ library(bladderbatch)
 data(bladderdata)
 dat <- bladderEset[1:5000,]
 
-pheno = pData(dat)
-edata = exprs(dat)
-mod = model.matrix(~as.factor(cancer), data=pheno)
+pheno <- pData(dat)
+edata <- exprs(dat)
+mod <- model.matrix(~as.factor(cancer), data=pheno)
 
-n.sv = num.sv(edata,mod,method="leek")
+n.sv <- num.sv(edata,mod,method="leek")
 pcontrol <- empirical.controls(edata,mod,mod0=NULL,n.sv=n.sv,type="norm")
 
 }

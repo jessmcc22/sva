@@ -17,22 +17,22 @@
 #' data(bladderdata)
 #' dat <- bladderEset[1:5000,]
 #' 
-#' pheno = pData(dat)
-#' edata = exprs(dat)
-#' mod = model.matrix(~as.factor(cancer), data=pheno)
+#' pheno <- pData(dat)
+#' edata <- exprs(dat)
+#' mod <- model.matrix(~as.factor(cancer), data=pheno)
 #' 
-#' n.sv = num.sv(edata,mod,method="leek")
+#' n.sv <- num.sv(edata,mod,method="leek")
 #' pcontrol <- empirical.controls(edata,mod,mod0=NULL,n.sv=n.sv,type="norm")
 #' 
 #' @export
 #' 
 
 empirical.controls <- function(dat, mod, mod0 = NULL,n.sv,B=5,type=c("norm","counts")) {
-    type = match.arg(type)
+    type <- match.arg(type)
     if((type=="counts") & any(dat < 0)){stop("empirical controls error: counts must be zero or greater")}
-    if(type=="counts"){dat = log(dat + 1)}
-    svobj = irwsva.build(dat, mod, mod0 = NULL,n.sv,B=5) 
-    pcontrol = svobj$pprob.gam
+    if(type=="counts"){dat <- log(dat + 1)}
+    svobj <- irwsva.build(dat, mod, mod0 = NULL,n.sv,B=5) 
+    pcontrol <- svobj$pprob.gam
     return(pcontrol)
     
 }
