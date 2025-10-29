@@ -29,14 +29,14 @@
 #' @export
 
 qsva <- function(degradationMatrix, 
-		mod = matrix(1, ncol=1, nrow = ncol(degradationMatrix))) {
-
-	# do PCA
-	degPca <- prcomp(t(log2(degradationMatrix+1)))
-
-	## how many PCs?
-	k <- num.sv(log2(degradationMatrix+1), mod)
-
-	# return qSVS
-	degPca$x[, seq_len(k)]
+    mod = matrix(1, ncol=1, nrow = ncol(degradationMatrix))) {
+    
+    # do PCA
+    degPca <- prcomp(t(log2(degradationMatrix+1)))
+    
+    ## how many PCs?
+    k <- num.sv(log2(degradationMatrix+1), mod)
+    
+    # return qSVS
+    degPca$x[, seq_len(k)]
 }

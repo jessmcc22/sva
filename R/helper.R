@@ -12,8 +12,8 @@ mono <- function(lfdr){
 }
 
 edge.lfdr <- function(p, trunc = TRUE, monotone = TRUE, 
-                    transf = c("probit", "logit"), adj = 1.5, eps = 10^-8, 
-                    lambda=0.8, ...) {
+    transf = c("probit", "logit"), adj = 1.5, eps = 10^-8, 
+    lambda=0.8, ...) {
     pi0 <- mean(p >= lambda)/(1 - lambda)
     pi0 <- min(pi0, 1)
     
@@ -42,7 +42,7 @@ edge.lfdr <- function(p, trunc = TRUE, monotone = TRUE,
     if(trunc) {
         lfdr[lfdr > 1] <- 1
     }
-    if(monotone) {	
+    if(monotone) {
         lfdr <- lfdr[order(p)]
         lfdr <- mono(lfdr)
         lfdr <- lfdr[rank(p)]
@@ -95,7 +95,7 @@ dinvgamma <- function (x, shape, rate = 1/scale, scale = 1) {
     ifelse(x <= 0, 
         0, 
         ((rate ^ shape) / gamma(shape)) * x ^ (-shape - 1) * exp(-rate/x)
-        )
+    )
 }
 
 # Pass in entire data set, the design matrix for the entire data, the batch
@@ -134,7 +134,7 @@ int.eprior <- function(sdat, g.hat, d.hat){
     r <- nrow(sdat)
     for(i in seq_len(r)){
         g <- g.hat[-i]
-        d <- d.hat[-i]		
+        d <- d.hat[-i]
         x <- sdat[i,!is.na(sdat[i,])]
         n <- length(x)
         j <- numeric(n)+1
@@ -149,7 +149,7 @@ int.eprior <- function(sdat, g.hat, d.hat){
     }
     adjust <- rbind(g.star,d.star)
     rownames(adjust) <- c("g.star","d.star")
-    adjust	
+    adjust
 } 
 
 ## fits the L/S model in the presence of missing data values

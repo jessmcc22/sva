@@ -45,52 +45,54 @@
 
 read.degradation.matrix <- function(covFiles, 
     sampleNames,
-	totalMapped, 
+    totalMapped, 
     readLength = 100, 
     normFactor = 80e6,
-	type = c("bwtool","region_matrix_single","region_matrix_all"),
-	BPPARAM = bpparam()) {
-	
-	type <- match.arg(type)
-	
-	if(length(covFiles) != length(sampleNames) & 
-	   type %in% c("bwtool", "region_matrix_single")){
-	    message <- paste0("Must provide one coverage file and sample name per ",
-	        "sample for 'bwtool' or 'region_matrix_single' types")
-	    stop(message)
-	    
-	} 
-	   
-	## read in data
-	if(type == "bwtool") { # bwtool output
-		degCov <- bplapply(covFiles, 
-		    read.delim,
-			as.is = TRUE,
-		    colClasses = c(rep("NULL",9), "numeric"),
-		    header = TRUE,
-		    BPPARAM = BPPARAM)
-		degCovMat <- do.call("cbind",degCov)	
-		colnames(degCovMat) <- sampleNames
-	} else if(type == "region_matrix_single") { # region w/ manifest
-		degCov <- bplapply(covFiles, read.delim,
-			as.is=TRUE,header=TRUE,row.names=1,BPPARAM=BPPARAM)
-		degCov <- lapply(degCov,as.numeric)
-		degCovMat <- do.call("cbind",degCov)	
-		colnames(degCovMat) <- sampleNames
-	} else if(type == "region_matrix_all") { # region w/ individual file
-		degCov <- read.delim(covFiles, as.is=TRUE,row.names=1)
-		degCovMat <- t(as.matrix(degCov))
-		colnames(degCovMat) <- sampleNames
-	} else stop("type must be 'bwtool','region_matrix_single','region_matrix_all'")
-	
-		
-	## normalize for library size and read length
-	degCovMat <- degCovMat/readLength # read length
-	bg <- matrix(rep(totalMapped/normFactor), 
-		ncol = ncol(degCovMat), 
-		nrow = nrow(degCovMat), byrow=TRUE)
-	degCovAdj <- degCovMat/bg
-	
-	# return
-	return(degCovAdj)
+    type = c("bwtool","region_matrix_single","region_matrix_all"),
+    BPPARAM = bpparam()) {
+    
+    type <- match.arg(type)
+    
+    if(length(covFiles) != length(sampleNames) & 
+            type %in% c("bwtool", "region_matrix_single")){
+        message <- paste0("Must provide one coverage file and sample name per ",
+            "sample for 'bwtool' or 'region_matrix_single' types")
+        stop(message)
+        
+    } 
+    
+    ## read in data
+    if(type == "bwtool") { # bwtool output
+        degCov <- bplapply(covFiles, 
+            read.delim,
+            as.is = TRUE,
+            colClasses = c(rep("NULL",9), "numeric"),
+            header = TRUE,
+            BPPARAM = BPPARAM)
+        degCovMat <- do.call("cbind",degCov)
+        colnames(degCovMat) <- sampleNames
+    } else if(type == "region_matrix_single") { # region w/ manifest
+        degCov <- bplapply(covFiles, read.delim,
+            as.is=TRUE,header=TRUE,row.names=1,BPPARAM=BPPARAM)
+        degCov <- lapply(degCov,as.numeric)
+        degCovMat <- do.call("cbind",degCov)
+        colnames(degCovMat) <- sampleNames
+    } else if(type == "region_matrix_all") { # region w/ individual file
+        degCov <- read.delim(covFiles, as.is=TRUE,row.names=1)
+        degCovMat <- t(as.matrix(degCov))
+        colnames(degCovMat) <- sampleNames
+    } else stop("type must be 'bwtool',
+        'region_matrix_single',
+        'region_matrix_all'")
+    
+    
+    ## normalize for library size and read length
+    degCovMat <- degCovMat/readLength # read length
+    bg <- matrix(rep(totalMapped/normFactor), 
+        ncol = ncol(degCovMat), 
+        nrow = nrow(degCovMat), byrow=TRUE)
+    degCovAdj <- degCovMat/bg
+    
+    # return
+    return(degCovAdj)
 }

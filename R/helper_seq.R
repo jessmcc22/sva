@@ -19,7 +19,7 @@ monte_carlo_int_NB <- function(dat, mu, gamma, phi, gene.subset.n){
             if(i==1){
                 cat(
                 sprintf("Using %s random genes for Monte Carlo integration\n", 
-                    gene.subset.n))
+                        gene.subset.n))
             }
             mcint_ind <- sample(seq_len((nrow(dat)-1)), gene.subset.n,
                 replace=FALSE)
@@ -55,7 +55,7 @@ monte_carlo_int_NB <- function(dat, mu, gamma, phi, gene.subset.n){
     weights <- do.call(cbind, weights)
     res <- list(gamma_star=pos_res[, "gamma.star"],
         phi_star=pos_res[, "phi.star"],
-        weights=weights)	
+        weights=weights)
     return(res)
 } 
 
