@@ -11,7 +11,9 @@ mono <- function(lfdr){
     .Call("monotone", as.numeric(lfdr), PACKAGE="sva")
 }
 
-edge.lfdr <- function(p, trunc=TRUE, monotone=TRUE, transf=c("probit", "logit"), adj=1.5, eps=10^-8, lambda=0.8, ...) {
+edge.lfdr <- function(p, trunc = TRUE, monotone = TRUE, 
+                    transf = c("probit", "logit"), adj = 1.5, eps = 10^-8, 
+                    lambda=0.8, ...) {
     pi0 <- mean(p >= lambda)/(1 - lambda)
     pi0 <- min(pi0, 1)
     
@@ -51,7 +53,8 @@ edge.lfdr <- function(p, trunc=TRUE, monotone=TRUE, transf=c("probit", "logit"),
 
 
 
-# Trims the data of extra columns, note your array names cannot be named 'X' or start with 'X.'
+# Trims the data of extra columns, note your array names cannot be named 'X' or 
+# start with 'X.'
 trim.dat <- function(dat){
     tmp <- strsplit(colnames(dat),'\\.')
     tr <- NULL
@@ -82,16 +85,22 @@ postvar <- function(sum2,n,a,b){
     (.5*sum2 + b) / (n/2 + a - 1)
 }
 
-# Inverse gamma distribution density function. (Note: does not do any bounds checking on arguments)
+# Inverse gamma distribution density function. (Note: does not do any bounds 
+# checking on arguments)
 dinvgamma <- function (x, shape, rate = 1/scale, scale = 1) {
     # PDF taken from https://en.wikipedia.org/wiki/Inverse-gamma_distribution
     # Note: alpha = shape, beta = rate
     stopifnot(shape > 0)
     stopifnot(rate > 0)
-    ifelse(x <= 0, 0, ((rate ^ shape) / gamma(shape)) * x ^ (-shape - 1) * exp(-rate/x))
+    ifelse(x <= 0, 
+        0, 
+        ((rate ^ shape) / gamma(shape)) * x ^ (-shape - 1) * exp(-rate/x)
+        )
 }
 
-# Pass in entire data set, the design matrix for the entire data, the batch means, the batch variances, priors (m, t2, a, b), columns of the data  matrix for the batch. Uses the EM to find the parametric batch adjustments
+# Pass in entire data set, the design matrix for the entire data, the batch
+# means, the batch variances, priors (m, t2, a, b), columns of the data  matrix 
+# for the batch. Uses the EM to find the parametric batch adjustments
 
 it.sol  <- function(sdat,g.hat,d.hat,g.bar,t2,a,b,conv=.0001){
     n <- rowSums(!is.na(sdat))

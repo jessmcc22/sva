@@ -1,19 +1,23 @@
-#' A function for estimating surrogate variables by estimating empirical control probes
+#' Estimates surrogate variables by estimating empirical control probes
 #' 
-#' This function is the implementation of the iteratively re-weighted least squares
-#' approach for estimating surrogate variables. As a buy product, this function
-#' produces estimates of the probability of being an empirical control. See the function
-#' \code{\link{empirical.controls}} for a direct estimate of the empirical controls. 
+#' This function is the implementation of the iteratively re-weighted least 
+#' squares approach for estimating surrogate variables. As a buy product, this 
+#' function produces estimates of the probability of being an empirical control.
+#' See the function \code{\link{empirical.controls}} for a direct estimate of 
+#' the empirical controls. 
 #' 
-#' @param dat The transformed data matrix with the variables in rows and samples in columns
+#' @param dat The transformed data matrix with the variables in rows and samples
+#'   in columns
 #' @param mod The model matrix being used to fit the data
 #' @param mod0 The null model being compared when fitting the data
 #' @param n.sv The number of surogate variables to estimate
 #' @param B The number of iterations of the irwsva algorithm to perform
 #' 
 #' @return sv The estimated surrogate variables, one in each column
-#' @return pprob.gam: A vector of the posterior probabilities each gene is affected by heterogeneity
-#' @return pprob.b A vector of the posterior probabilities each gene is affected by mod
+#' @return pprob.gam: A vector of the posterior probabilities each gene is
+#'   affected by heterogeneity
+#' @return pprob.b A vector of the posterior probabilities each gene is affected
+#'   by mod
 #' @return n.sv The number of significant surrogate variables
 #' 
 #' @examples 

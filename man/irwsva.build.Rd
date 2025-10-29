@@ -2,12 +2,13 @@
 % Please edit documentation in R/irwsva.build.R
 \name{irwsva.build}
 \alias{irwsva.build}
-\title{A function for estimating surrogate variables by estimating empirical control probes}
+\title{Estimates surrogate variables by estimating empirical control probes}
 \usage{
 irwsva.build(dat, mod, mod0 = NULL, n.sv, B = 5)
 }
 \arguments{
-\item{dat}{The transformed data matrix with the variables in rows and samples in columns}
+\item{dat}{The transformed data matrix with the variables in rows and samples
+in columns}
 
 \item{mod}{The model matrix being used to fit the data}
 
@@ -20,17 +21,20 @@ irwsva.build(dat, mod, mod0 = NULL, n.sv, B = 5)
 \value{
 sv The estimated surrogate variables, one in each column
 
-pprob.gam: A vector of the posterior probabilities each gene is affected by heterogeneity
+pprob.gam: A vector of the posterior probabilities each gene is
+  affected by heterogeneity
 
-pprob.b A vector of the posterior probabilities each gene is affected by mod
+pprob.b A vector of the posterior probabilities each gene is affected
+  by mod
 
 n.sv The number of significant surrogate variables
 }
 \description{
-This function is the implementation of the iteratively re-weighted least squares
-approach for estimating surrogate variables. As a buy product, this function
-produces estimates of the probability of being an empirical control. See the function
-\code{\link{empirical.controls}} for a direct estimate of the empirical controls.
+This function is the implementation of the iteratively re-weighted least 
+squares approach for estimating surrogate variables. As a buy product, this 
+function produces estimates of the probability of being an empirical control.
+See the function \code{\link{empirical.controls}} for a direct estimate of 
+the empirical controls.
 }
 \examples{
 library(bladderbatch)

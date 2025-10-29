@@ -31,7 +31,7 @@
 #' 
 #' @export
 #' 
-num.sv <- function(dat, mod,method=c("be","leek"),vfilter=NULL,B=20,seed=NULL){  
+num.sv <- function(dat, mod,method=c("be","leek"),vfilter=NULL,B=20,seed=NULL){
     if(!is.null(vfilter)){
         if(vfilter < 100 | vfilter > dim(dat)[1]){
             message <- paste0("The number of genes used in the analysis must ",

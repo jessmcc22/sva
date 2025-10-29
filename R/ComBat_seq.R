@@ -43,7 +43,7 @@
 #' @export
 #' 
 
-ComBat_seq <- function(counts, batch, group=NULL, covar_mod=NULL, full_mod=TRUE, 
+ComBat_seq <- function(counts, batch, group=NULL, covar_mod=NULL, full_mod=TRUE,
     shrink=FALSE, shrink.disp=FALSE, gene.subset.n=NULL){  
     ########  Preparation  ########  
     ## Does not support 1 sample per batch yet
@@ -198,7 +198,7 @@ ComBat_seq <- function(counts, batch, group=NULL, covar_mod=NULL, full_mod=TRUE,
     #average from batches
     new_offset <- t(vec2mat(getOffset(dge_obj), 
         nrow(counts))) +   # original offset - sample (library) size
-        vec2mat(alpha_g, ncol(counts)) # new offset - gene background expression 
+        vec2mat(alpha_g, ncol(counts)) # new offset - gene background expression
     # getOffset(dge_obj) is the same as 
     # log(dge_obj$samples$lib.size)
     glm_f2 <- glmFit.default(dge_obj$counts,

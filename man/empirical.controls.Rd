@@ -2,7 +2,7 @@
 % Please edit documentation in R/empirical.controls.R
 \name{empirical.controls}
 \alias{empirical.controls}
-\title{A function for estimating the probability that each gene is an empirical control}
+\title{Estimates the probability that each gene is an empirical control}
 \usage{
 empirical.controls(
   dat,
@@ -14,7 +14,8 @@ empirical.controls(
 )
 }
 \arguments{
-\item{dat}{The transformed data matrix with the variables in rows and samples in columns}
+\item{dat}{The transformed data matrix with the variables in rows and samples
+in columns}
 
 \item{mod}{The model matrix being used to fit the data}
 
@@ -24,14 +25,15 @@ empirical.controls(
 
 \item{B}{The number of iterations of the irwsva algorithm to perform}
 
-\item{type}{If type is norm then standard irwsva is applied, if type is counts, then the moderated log transform is applied first}
+\item{type}{If type is norm then standard irwsva is applied, if type is
+counts, then the moderated log transform is applied first}
 }
 \value{
 pcontrol A vector of probabilites that each gene is a control.
 }
 \description{
-This function uses the iteratively reweighted surrogate variable analysis approach
-to estimate the probability that each gene is an empirical control.
+This function uses the iteratively reweighted surrogate variable analysis 
+approach to estimate the probability that each gene is an empirical control.
 }
 \examples{
 library(bladderbatch)

@@ -9,7 +9,8 @@
 #' @param totalMapped how many reads per sample (library size normalization) 
 #' @param readLength read length in base pairs (read length normalization)
 #' @param normFactor common library size to normalize to; 80M reads as default
-#' @param type whether input are individual `bwtool` output, `region_matrix` run on individual samples, or `region_matrix` run on all samples together
+#' @param type whether input are individual `bwtool` output, `region_matrix` run
+#'   on individual samples, or `region_matrix` run on all samples together
 #' @param BPPARAM (Optional) BiocParallelParam for parallel operation
 #'
 #' @return the normalized degradation matrix, region by sample
@@ -53,9 +54,13 @@ read.degradation.matrix <- function(covFiles,
 	type <- match.arg(type)
 	
 	if(length(covFiles) != length(sampleNames) & 
-		type %in% c("bwtool", "region_matrix_single")) 
-			stop("Must provide one coverage file and sample name per sample for 'bwtool' or 'region_matrix_single' types")
-	
+	   type %in% c("bwtool", "region_matrix_single")){
+	    message <- paste0("Must provide one coverage file and sample name per ",
+	        "sample for 'bwtool' or 'region_matrix_single' types")
+	    stop(message)
+	    
+	} 
+	   
 	## read in data
 	if(type == "bwtool") { # bwtool output
 		degCov <- bplapply(covFiles, 

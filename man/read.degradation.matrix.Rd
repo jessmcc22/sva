@@ -25,7 +25,8 @@ read.degradation.matrix(
 
 \item{normFactor}{common library size to normalize to; 80M reads as default}
 
-\item{type}{whether input are individual `bwtool` output, `region_matrix` run on individual samples, or `region_matrix` run on all samples together}
+\item{type}{whether input are individual `bwtool` output, `region_matrix` run
+on individual samples, or `region_matrix` run on all samples together}
 
 \item{BPPARAM}{(Optional) BiocParallelParam for parallel operation}
 }
