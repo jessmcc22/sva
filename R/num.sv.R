@@ -13,8 +13,10 @@
 #' @param method One of "be" or "leek" as described in the details section
 #' @param vfilter You may choose to filter to the vfilter most variable rows
 #'   before performing the analysis
-#' @param B The number of permutaitons to use if method = "be"
-#' @param seed Set a seed when using the permutation approach 
+#' @param B The number of permutations to use if method = "be"
+#' @param seed Set a seed when using the permutation approach; no longer
+#'   supported. Please set a seed prior to running the function. Variable
+#'   kept for backwards compatability - will create a warning 
 #' 
 #' @return n.sv The number of surrogate variables to use in the sva software
 #' 
@@ -45,7 +47,10 @@ num.sv <- function(dat, mod,method=c("be","leek"),vfilter=NULL,B=20,seed=NULL){
     
     method <- match.arg(method)
     if(method=="be"){
-        if(!is.null(seed)){set.seed(seed)}
+        if(!is.null(seed)){
+            message <- paste0("set.seed is no longer supported within the ",
+                "function. Please set a seed prior to running num.sv")
+            stop(message)}
         warn <- NULL
         n <- ncol(dat)
         m <- nrow(dat)

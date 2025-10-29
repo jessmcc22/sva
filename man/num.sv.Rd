@@ -18,9 +18,11 @@ in columns}
 \item{vfilter}{You may choose to filter to the vfilter most variable rows
 before performing the analysis}
 
-\item{B}{The number of permutaitons to use if method = "be"}
+\item{B}{The number of permutations to use if method = "be"}
 
-\item{seed}{Set a seed when using the permutation approach}
+\item{seed}{Set a seed when using the permutation approach; no longer
+supported. Please set a seed prior to running the function. Variable
+kept for backwards compatability - will create a warning}
 }
 \value{
 n.sv The number of surrogate variables to use in the sva software
