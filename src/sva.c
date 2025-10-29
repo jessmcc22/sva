@@ -26,12 +26,13 @@ SEXP monotone(SEXP lfdr){
 static const
 R_CallMethodDef callMethods[]  = {
   {"monotone", (DL_FUNC) &monotone, 1},
-  {NULL}
+  {NULL, NULL, 0}
 };
 
 void R_init_sva(DllInfo *info)
 {
      R_registerRoutines(info, NULL, callMethods, NULL, NULL);
+    R_useDynamicSymbols(info, FALSE);
 }
      
 void R_unload_sva(DllInfo *info)
