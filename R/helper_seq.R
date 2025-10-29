@@ -38,8 +38,9 @@ monte_carlo_int_NB <- function(dat, mu, gamma, phi, gene.subset.n){
         
         #LH <- sapply(seq_len(G_sub),
         #function(j){sum(log2(dnbinom(x, mu=m[j,], size=1/phi_sub[j])+1))})  
-        LH <- sapply(seq_len(G_sub), 
-            function(j){prod(dnbinom(x, mu=m[j,], size=1/phi_sub[j]))})
+        LH <- vapply(seq_len(G_sub), 
+            function(j){prod(dnbinom(x, mu=m[j,], size=1/phi_sub[j]))},
+            numeric(1))
         LH[is.nan(LH)] <- 0; 
         if(sum(LH)==0 | is.na(sum(LH))){
             pos_res[[i]] <- c(gamma.star=as.numeric(gamma[i]),

@@ -118,7 +118,7 @@ ComBat <- function(dat, batch, mod = NULL, par.prior = TRUE,
     for (i in seq_len(n.batch)) {
         batches[[i]] <- which(batch == levels(batch)[i])
     } # list of samples in each batch  
-    n.batches <- sapply(batches, length)
+    n.batches <- vapply(batches, length, numeric(1))
     if(any(n.batches==1)){
         mean.only <- TRUE
         message("Note: one batch has only one sample, setting mean.only=TRUE")

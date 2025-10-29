@@ -69,7 +69,7 @@ ComBat_seq <- function(counts, batch, group=NULL, covar_mod=NULL, full_mod=TRUE,
     batches_ind <- lapply(seq_len(n_batch),
         function(i){
             which(batch == levels(batch)[i])}) # list of samples in each batch  
-    n_batches <- sapply(batches_ind, length)
+    n_batches <- vapply(batches_ind, length, numeric(1))
     #  if(any(n_batches==1)){
     #    mean_only=TRUE; 
     #    cat("Note: one batch has only one sample, setting mean.only=TRUE\n")}
@@ -149,19 +149,21 @@ ComBat_seq <- function(counts, batch, group=NULL, covar_mod=NULL, full_mod=TRUE,
     ########  Estimate gene-wise dispersions within each batch  ########
     cat("Estimating dispersions\n")
     ## Estimate common dispersion within each batch as an initial value
-    disp_common <- sapply(seq_len(n_batch), function(i){
-        if((n_batches[i] <= ncol(design)-ncol(batchmod)+1) | 
-                qr(mod[batches_ind[[i]], ])$rank < ncol(mod)){ 
-            # not enough residual degree of freedom
-            return(estimateGLMCommonDisp(counts[, batches_ind[[i]]], 
-                design=NULL, 
-                subset=nrow(counts)))
-        }else{
-            return(estimateGLMCommonDisp(counts[, batches_ind[[i]]], 
-                design=mod[batches_ind[[i]], ], 
-                subset=nrow(counts)))
-        }
-    })
+    disp_common <- vapply(seq_len(n_batch), 
+        function(i){
+            if((n_batches[i] <= ncol(design)-ncol(batchmod)+1) | 
+                    qr(mod[batches_ind[[i]], ])$rank < ncol(mod)){ 
+                # not enough residual degree of freedom
+                return(estimateGLMCommonDisp(counts[, batches_ind[[i]]], 
+                    design=NULL, 
+                    subset=nrow(counts)))
+            }else{
+                return(estimateGLMCommonDisp(counts[, batches_ind[[i]]], 
+                    design=mod[batches_ind[[i]], ], 
+                    subset=nrow(counts)))
+            }
+        },
+        numeric(1))
     
     ## Estimate gene-wise dispersion within each batch 
     genewise_disp_lst <- lapply(seq_len(n_batch), function(j){
