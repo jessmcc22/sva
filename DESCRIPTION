@@ -63,7 +63,8 @@ Suggests:
     zebrafishRNASeq
 VignetteBuilder: 
     knitr
-biocViews: ImmunoOncology, Microarray, StatisticalMethod, Preprocessing,
-    MultipleComparison, Sequencing, RNASeq, BatchEffect, Normalization
+biocViews: BatchEffect, GeneExpression, GenomicVariation, ImmunoOncology, 
+    Microarray, MultipleComparison, Normalization, Regression, RNASeq, 
+    StatisticalMethod, Sequencing, Preprocessing
 RoxygenNote: 7.3.3
 Encoding: UTF-8
