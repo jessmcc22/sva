@@ -54,7 +54,7 @@ irwsva.build <- function(dat, mod, mod0 = NULL, n.sv, B = 5) {
     
     rm(resid)
     
-    cat(paste("Iteration (out of", B,"):"))
+    message("Iteration (out of ", B, "):")
     for(i in seq_len(B)){
         mod.b <- cbind(mod,uu$vectors[,seq_len(n.sv)])
         mod0.b <- cbind(mod0,uu$vectors[,seq_len(n.sv)])
@@ -69,7 +69,7 @@ irwsva.build <- function(dat, mod, mod0 = NULL, n.sv, B = 5) {
         dats <- dat*pprob
         dats <- dats - rowMeans(dats)
         uu <- eigen(t(dats)%*%dats)
-        cat(paste(i," "))
+        message(i," ")
     }
     
     sv <- svd(dats)$v[,seq_len(n.sv), drop=FALSE]

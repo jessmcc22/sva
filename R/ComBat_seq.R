@@ -72,9 +72,10 @@ ComBat_seq <- function(counts, batch, group=NULL, covar_mod=NULL, full_mod=TRUE,
     n_batches <- vapply(batches_ind, length, numeric(1))
     #  if(any(n_batches==1)){
     #    mean_only=TRUE; 
-    #    cat("Note: one batch has only one sample, setting mean.only=TRUE\n")}
+    #    message("Note: one batch has only one sample, ", 
+    #       "setting mean.only=TRUE")}
     n_sample <- sum(n_batches)
-    cat("Found",n_batch,'batches\n')
+    message("Found ", n_batch, ' batches')
     
     ## Make design matrix 
     # batch
@@ -82,10 +83,10 @@ ComBat_seq <- function(counts, batch, group=NULL, covar_mod=NULL, full_mod=TRUE,
     # covariate
     group <- as.factor(group)
     if(full_mod & nlevels(group)>1){
-        cat("Using full model in ComBat-seq.\n")
+        message("Using full model in ComBat-seq.")
         mod <- model.matrix(~group)
     }else{
-        cat("Using null model in ComBat-seq.\n")
+        message("Using null model in ComBat-seq.")
         mod <- model.matrix(~1, data=as.data.frame(t(counts)))
     }
     # drop intercept in covariate model
@@ -112,9 +113,9 @@ ComBat_seq <- function(counts, batch, group=NULL, covar_mod=NULL, full_mod=TRUE,
     ## except don't throw away the reference batch indicator
     
     design <- as.matrix(design[,!check])
-    cat("Adjusting for", 
+    message("Adjusting for ", 
         ncol(design)-ncol(batchmod),
-        'covariate(s) or covariate level(s)\n')
+        ' covariate(s) or covariate level(s)')
     
     ## Check if the design is confounded
     if(qr(design)$rank<ncol(design)){
@@ -143,11 +144,11 @@ ComBat_seq <- function(counts, batch, group=NULL, covar_mod=NULL, full_mod=TRUE,
     
     ## Check for missing values in count matrix
     NAs <- any(is.na(counts))
-    if(NAs){cat(c('Found',sum(is.na(counts)),'Missing Data Values\n'),sep=' ')}
+    if(NAs){message(c('Found',sum(is.na(counts)),'Missing Data Values'),sep=' ')}
     
     
     ########  Estimate gene-wise dispersions within each batch  ########
-    cat("Estimating dispersions\n")
+    message("Estimating dispersions")
     ## Estimate common dispersion within each batch as an initial value
     disp_common <- vapply(seq_len(n_batch), 
         function(i){
@@ -188,7 +189,7 @@ ComBat_seq <- function(counts, batch, group=NULL, covar_mod=NULL, full_mod=TRUE,
     
     
     ########  Estimate parameters from NB GLM  ########
-    cat("Fitting the GLM model\n")
+    message("Fitting the GLM model")
     glm_f <- glmFit(dge_obj, 
         design=design, 
         dispersion=phi_matrix, 
@@ -217,7 +218,8 @@ ComBat_seq <- function(counts, batch, group=NULL, covar_mod=NULL, full_mod=TRUE,
     ########  In each batch, compute posterior estimation through   ######## 
     ########  Monte-Carlo integration  ########  
     if(shrink){
-        cat("Apply shrinkage - computing posterior estimates for parameters\n")
+        message("Apply shrinkage - computing posterior estimates for ", 
+            "parameters")
         mcint_fun <- monte_carlo_int_NB
         monte_carlo_res <- lapply(seq_len(n_batch), function(ii){
             if(ii==1){
@@ -244,11 +246,11 @@ ComBat_seq <- function(counts, batch, group=NULL, covar_mod=NULL, full_mod=TRUE,
         phi_star_mat <- do.call(cbind, phi_star_mat)
         
         if(!shrink.disp){
-            cat("Apply shrinkage to mean only\n")
+            message("Apply shrinkage to mean only")
             phi_star_mat <- phi_hat
         }
     }else{
-        cat("Shrinkage off - using GLM estimates for parameters\n")
+        message("Shrinkage off - using GLM estimates for parameters")
         gamma_star_mat <- gamma_hat
         phi_star_mat <- phi_hat
     }
@@ -264,7 +266,7 @@ ComBat_seq <- function(counts, batch, group=NULL, covar_mod=NULL, full_mod=TRUE,
     
     
     ########  Adjust the data  ########  
-    cat("Adjusting the data\n")
+    message("Adjusting the data")
     adjust_counts <- matrix(NA, nrow=nrow(counts), ncol=ncol(counts))
     for(kk in seq_len(n_batch)){
         counts_sub <- counts[, batches_ind[[kk]]]

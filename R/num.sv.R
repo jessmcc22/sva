@@ -108,6 +108,6 @@ num.sv <- function(dat, mod,method=c("be","leek"),vfilter=NULL,B=20,seed=NULL){
         
         n.sv <- modefunc(rhat[start:finish,10])
         return(n.sv)
-        print(method)
+        message(method)
     }
 }

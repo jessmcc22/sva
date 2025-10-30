@@ -60,7 +60,8 @@ sva <- function(dat, mod, mod0 = NULL,n.sv=NULL,controls=NULL,
         stop(message)}
     if(!is.null(controls) & (method!="supervised")){
         method  <-  "supervised"; 
-        cat("sva warning: controls provided, supervised sva being performed\n")
+        message("sva warning: controls provided, supervised sva being ",
+            "performed")
     }
     
     if(!is.null(vfilter)){
@@ -85,7 +86,7 @@ sva <- function(dat, mod, mod0 = NULL,n.sv=NULL,controls=NULL,
     }
     
     if(n.sv > 0){
-        cat(paste("Number of significant surrogate variables is: ",n.sv,"\n"))
+        message("Number of significant surrogate variables is: ", n.sv)
         
         if(method=="two-step"){
             return(twostepsva.build(dat=dat, mod=mod,n.sv=n.sv))
@@ -97,7 +98,7 @@ sva <- function(dat, mod, mod0 = NULL,n.sv=NULL,controls=NULL,
             return(ssva(dat,controls,n.sv))
         }
     }else{
-        cat("No significant surrogate variables\n");
+        message("No significant surrogate variables");
         return(list(sv=matrix(nrow=ncol(dat), ncol=0),
             pprob.gam = rep(0, nrow(dat)), pprob.b=NULL, n.sv=0))
     }

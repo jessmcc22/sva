@@ -79,9 +79,9 @@ ComBat <- function(dat, batch, mod = NULL, par.prior = TRUE,
     keep.rows <- setdiff(seq_len(nrow(dat)), zero.rows)
     
     if (length(zero.rows) > 0) {
-        message <- paste0("Found %d genes with uniform expression within a ",
-            "single batch (all zeros); these will not be adjusted for batch.\n")
-        cat(sprintf(message, length(zero.rows)))
+        message(sprintf("Found %d genes with uniform expression within a ", 
+            "single batch (all zeros); these will not be adjusted for batch.",
+            length(zero.rows)))
         # keep a copy of the original data matrix and remove zero var rows
         dat.orig <- dat
         dat <- dat[keep.rows, ]

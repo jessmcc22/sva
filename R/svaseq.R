@@ -65,7 +65,8 @@ svaseq <- function(dat, mod, mod0 = NULL,n.sv=NULL,controls=NULL,
         stop(message)}
     if(!is.null(controls) & (method!="supervised")){
         method <- "supervised";
-        cat("sva warning: controls provided, supervised sva being performed\n")
+        message("sva warning: controls provided, supervised sva being ",
+            "performed")
     }
     
     if(any(dat < 0)){stop("svaseq error: counts must be zero or greater")}
@@ -88,7 +89,7 @@ svaseq <- function(dat, mod, mod0 = NULL,n.sv=NULL,controls=NULL,
     }
     
     if(n.sv > 0){
-        cat(paste("Number of significant surrogate variables is: ",n.sv,"\n"))
+        message("Number of significant surrogate variables is: ", n.sv)
         
         if(method=="two-step"){
             return(twostepsva.build(dat=dat, mod=mod,n.sv=n.sv))
@@ -100,7 +101,7 @@ svaseq <- function(dat, mod, mod0 = NULL,n.sv=NULL,controls=NULL,
             return(ssva(dat,controls,n.sv=n.sv))
         }
     }else{
-        cat("No significant surrogate variables\n"); 
+        message("No significant surrogate variables"); 
         return(list(sv=0,pprob.gam=0,pprob.b=0,n.sv=0))
     }
 }
