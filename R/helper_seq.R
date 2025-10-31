@@ -17,9 +17,8 @@ monte_carlo_int_NB <- function(dat, mu, gamma, phi, gene.subset.n){
         if(!is.null(gene.subset.n) & is.numeric(gene.subset.n) & 
                 length(gene.subset.n)==1){
             if(i==1){
-                message(
-                sprintf("Using %s random genes for Monte Carlo integration", 
-                        gene.subset.n))
+                message(sprintf("Using %s random genes for Monte Carlo ",
+                "integration", gene.subset.n))
             }
             mcint_ind <- sample(seq_len((nrow(dat)-1)), gene.subset.n,
                 replace=FALSE)
@@ -33,9 +32,7 @@ monte_carlo_int_NB <- function(dat, mu, gamma, phi, gene.subset.n){
                 "function runs very slow for large number of genes")}
             G_sub <- nrow(dat)-1
         }
-        
-        #LH <- sapply(seq_len(G_sub),
-        #function(j){sum(log2(dnbinom(x, mu=m[j,], size=1/phi_sub[j])+1))})  
+       
         LH <- vapply(seq_len(G_sub), 
             function(j){prod(dnbinom(x, mu=m[j,], size=1/phi_sub[j]))},
             numeric(1))

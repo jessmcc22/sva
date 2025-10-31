@@ -36,26 +36,22 @@
 #' @export
 #' 
 
-
 twostepsva.build <- function(dat, mod, n.sv){
-    
     n <- ncol(dat)
     m <- nrow(dat)
     H <- mod %*% solve(t(mod) %*% mod) %*% t(mod) 
     res <- dat - t(H %*% t(dat))
     uu <- svd(res)
     ndf <- n - ceiling(sum(diag(H)))
-    dstat <-  uu$d[seq_len(ndf)]^2/sum(uu$d[seq_len(ndf)]^2)
-    res.sv <- uu$v[,seq_len(n.sv), drop=FALSE]
-    
-    use.var <- matrix(rep(FALSE, n.sv*m), ncol=n.sv)
-    pp <- matrix(rep(FALSE, n.sv*m), ncol=n.sv)
-    
+    dstat <-  uu$d[seq_len(ndf)]^2 / sum(uu$d[seq_len(ndf)]^2)
+    res.sv <- uu$v[, seq_len(n.sv), drop = FALSE]
+    use.var <- matrix(rep(FALSE, n.sv*m), ncol = n.sv)
+    pp <- matrix(rep(FALSE, n.sv*m), ncol = n.sv)
     
     for(i in seq_len(n.sv)) {
-        mod <- cbind(rep(1,n),res.sv[,i])
+        mod <- cbind(rep(1,n), res.sv[,i])
         mod0 <- cbind(rep(1,n))
-        pp[,i] <-f.pvalue(dat,mod,mod0)
+        pp[,i] <- f.pvalue(dat, mod, mod0)
         use.var[,i] <- edge.lfdr(pp[,i]) < 0.10
     }
     
@@ -66,9 +62,10 @@ twostepsva.build <- function(dat, mod, n.sv){
             if(n.sv <= 0){break}
         }
     }
+    
     if(n.sv >0){
-        sv <- matrix(0,nrow=n,ncol=n.sv)
-        dat <- t(scale(t(dat),scale=FALSE))
+        sv <- matrix(0, nrow = n, ncol=n.sv)
+        dat <- t(scale(t(dat), scale=FALSE))
         for(i in seq_len(n.sv)) {
             uu <- svd(dat[use.var[,i],])
             maxcor <- 0
@@ -81,13 +78,11 @@ twostepsva.build <- function(dat, mod, n.sv){
         }
         pprob.gam <- use.var %*% rep(1,n.sv) > 0
         retval <- list(sv=sv,pprob.gam=pprob.gam,pprob.b=NULL,n.sv=n.sv)
-        return(retval)
-    }
-    else{
+    } else{
         sv <- rep(0,n)
         ind <- rep(0,m)
         n.sv <- 0
         retval <- list(sv=sv,pprob.gam=rep(0,m),pprob.b = NULL,n.sv=n.sv)
-        return(retval)
     }
+    return(retval)
 }

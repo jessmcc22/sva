@@ -160,3 +160,56 @@ Beta.NA <- function(y,X){
     B <- solve(crossprod(des), crossprod(des, y1))
     B
 }
+
+# method == "be" for num.sv()
+
+be_method <- function(dat, mod, B){
+    warn <- NULL
+    n <- ncol(dat)
+    m <- nrow(dat)
+    H <- mod %*% solve(t(mod) %*% mod) %*% t(mod) 
+    res <- dat - t(H %*% t(dat))
+    uu <- svd(res)
+    ndf <- min(m,n) - ceiling(sum(diag(H)))
+    dstat <- uu$d[seq_len(ndf)]^2/sum(uu$d[seq_len(ndf)]^2)
+    dstat0 <- matrix(0, nrow=B, ncol=ndf)
+    
+    for(i in seq_len(B)){
+        res0 <- t(apply(res, 1, sample, replace=FALSE))
+        res0 <- res0 - t(H %*% t(res0))
+        uu0 <- svd(res0)
+        dstat0[i,] <- uu0$d[seq_len(ndf)]^2/sum(uu0$d[seq_len(ndf)]^2)
+    }
+    psv <- rep(1, n)
+    for(i in seq_len(ndf)){
+        psv[i] <- mean(dstat0[,i] >= dstat[i])
+    }
+    for(i in 2:ndf){
+        psv[i] <- max(psv[(i-1)],psv[i])
+    }
+    nsv <- sum(psv <= 0.10)
+    return(as.numeric(list(n.sv = nsv)))
+}
+
+# exact method for fsva surrogate calculation
+
+exact_method <- function(nnew, n.sv, dbdat, newdat, sv, ndb, gammahat){
+    newV <- matrix(nrow = nnew, ncol=n.sv)
+    for(i in seq_len(nnew)){
+        tmp <- cbind(dbdat, newdat[,i])
+        tmpd <- (1-sv$pprob.b)*sv$pprob.gam*tmp
+        ss <- svd(t(scale(t(tmpd), scale=FALSE)))
+        sgn <- rep(NA, sv$n.sv)
+        for(j in seq_len(sv$n.sv)){
+            if(sv$n.sv > 1){
+                sgn[j] <- sign(cor(ss$v[seq_len(ndb), j],
+                    sv$sv[seq_len(ndb), j]))
+            }else if(sv$n.sv == 1){
+                sgn[j] <- sign(cor(ss$v[seq_len(ndb), j],
+                    sv$sv[seq_len(ndb)]))
+            }
+        }
+        newV[i,] <- ss$v[(ndb+1), seq_len(sv$n.sv)]*sgn
+    }
+return(newV)
+}

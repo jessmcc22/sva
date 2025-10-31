@@ -49,33 +49,8 @@ num.sv <- function(dat, mod,method=c("be","leek"),vfilter=NULL,B=20,seed=NULL){
         if(!is.null(seed)){
             stop("set.seed is no longer supported within the function. ",
             "Please set a seed prior to running num.sv")
-            }
-        warn <- NULL
-        n <- ncol(dat)
-        m <- nrow(dat)
-        H <- mod %*% solve(t(mod) %*% mod) %*% t(mod) 
-        res <- dat - t(H %*% t(dat))
-        uu <- svd(res)
-        ndf <- min(m,n) - ceiling(sum(diag(H)))
-        dstat <- uu$d[seq_len(ndf)]^2/sum(uu$d[seq_len(ndf)]^2)
-        dstat0 <- matrix(0,nrow=B,ncol=ndf)
-        
-        for(i in seq_len(B)){
-            res0 <- t(apply(res, 1, sample, replace=FALSE))
-            res0 <- res0 - t(H %*% t(res0))
-            uu0 <- svd(res0)
-            dstat0[i,] <- uu0$d[seq_len(ndf)]^2/sum(uu0$d[seq_len(ndf)]^2)
         }
-        psv <- rep(1,n)
-        for(i in seq_len(ndf)){
-            psv[i] <- mean(dstat0[,i] >= dstat[i])
-        }
-        for(i in 2:ndf){
-            psv[i] <- max(psv[(i-1)],psv[i]) 
-        }
-        
-        nsv <- sum(psv <= 0.10)
-        return(as.numeric(list(n.sv = nsv)))
+        return(be_method(dat, mod, B))
     }else{
         dat <- as.matrix(dat)
         dims <- dim(dat)
@@ -98,15 +73,12 @@ num.sv <- function(dat, mod,method=c("be","leek"),vfilter=NULL,B=20,seed=NULL){
             rhat[,j] <- rev((u[v==TRUE]-w))
         }
         ss <- rowVars(rhat)
-        
         bumpstart <- which.max(ss > (2*ss[1]))
         start <- which.max(c(rep(1e5,bumpstart),
             ss[(bumpstart+1):100]) < 0.5*ss[1])
         finish <- which.max(ss*c(rep(0,start),rep(1,100-start)) > ss[1])
         if(finish==1){finish <- 100}
-        
         n.sv <- modefunc(rhat[start:finish,10])
         return(n.sv)
-        message(method)
     }
 }

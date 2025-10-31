@@ -60,21 +60,20 @@
 #' @export
 #' 
 
-fsva <- function(dbdat,mod,sv,newdat=NULL,method=c("fast","exact")){
-    
+fsva <- function(dbdat, mod, sv, newdat=NULL, method=c("fast","exact")){
     method <- match.arg(method)
     ndb <- dim(dbdat)[2]
     nnew <- dim(newdat)[2]
     nmod <- dim(mod)[2]
     ntot <- ndb + nnew
-    n.sv<-sv$n.sv
+    n.sv <- sv$n.sv
     
     # Adjust the database
     mod <- cbind(mod,sv$sv)
     gammahat <- (dbdat %*% mod %*%
             solve(t(mod) %*% mod))[,(nmod+1):(nmod + sv$n.sv)]
     db <- dbdat - gammahat %*% t(sv$sv)
-    adjusted<-NA
+    adjusted <- NA
     
     if(!is.null(newdat)){
         # Calculate the new surrogate variables
@@ -88,15 +87,10 @@ fsva <- function(dbdat,mod,sv,newdat=NULL,method=c("fast","exact")){
             newV <- P %*% newdat
             sgn <- rep(NA,n.sv)
             for(j in seq_len(sv$n.sv)){
-                # This code should continue working with drop=FALSE since
-                # matrices are also vectors. Remove the else once there's no
-                # more concern about backward-compatibility with sva objects
-                # from previous versions.
                 if(sv$n.sv>1){
                     sgn[j] <- sign(cor(svd.wx$v[seq_len(ndb),j],
                         sv$sv[seq_len(ndb),j]))
-                }
-                else if(sv$n.sv==1){
+                } else if(sv$n.sv==1){
                     sgn[j] <- sign(cor(svd.wx$v[seq_len(ndb),j],
                         sv$sv[seq_len(ndb)]))
                 }
@@ -105,37 +99,13 @@ fsva <- function(dbdat,mod,sv,newdat=NULL,method=c("fast","exact")){
             newV <- t(newV)
             newV <- scale(newV)/sqrt(dim(newV)[1])
             newV <- t(newV)
-            
-            
         }else if(method=="exact"){
-            newV <- matrix(nrow=nnew,ncol=n.sv)
-            for(i in seq_len(nnew)){
-                tmp <- cbind(dbdat,newdat[,i])
-                tmpd <- (1-sv$pprob.b)*sv$pprob.gam*tmp
-                ss <- svd(t(scale(t(tmpd),scale=FALSE)))
-                sgn <- rep(NA,sv$n.sv)
-                for(j in seq_len(sv$n.sv)){
-                    # This code should continue working with drop=FALSE since
-                    # matrices are also vectors. Remove the else once there's no
-                    # more concern about backward-compatibility with sva objects
-                    # from previous versions.
-                    if(sv$n.sv>1){
-                        sgn[j] <- sign(cor(ss$v[seq_len(ndb),j],
-                            sv$sv[seq_len(ndb),j]))
-                    }
-                    else if(sv$n.sv==1){
-                        sgn[j] <- sign(cor(ss$v[seq_len(ndb),j],
-                            sv$sv[seq_len(ndb)]))
-                    }
-                }
-                newV[i,]<-ss$v[(ndb+1),seq_len(sv$n.sv)]*sgn
-            }
-            newV <- t(newV)
+            newV <- exact_method(nnew, n.sv, dbdat, newdat, sv, ndb, 
+                gammahat)
         }
         
         adjusted <- newdat - gammahat %*% newV
         newV <- t(newV)
     }
-    
-    return(list(db=db,new=adjusted,newsv = newV))
+    return(list(db=db, new=adjusted, newsv = newV))
 }
