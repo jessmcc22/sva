@@ -41,10 +41,9 @@
 
 sva.check <- function(svaobj,dat,mod,mod0){
     if(mean(svaobj$pprob.gam) > 0.95){
-        message <- paste0("Nearly all genes identified as batch associated, ",
+        message("Nearly all genes identified as batch associated, ",
             "estimates of batch may be compromised. Please check your data ",
             "carefully before using sva. Reverting to 2-step sva algorithm.")
-        message(message)
         svaobj <- sva(dat,mod,mod0,method="two-step")
     }
     return(svaobj)

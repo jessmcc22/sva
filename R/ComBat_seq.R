@@ -123,28 +123,25 @@ ComBat_seq <- function(counts, batch, group=NULL, covar_mod=NULL, full_mod=TRUE,
         #stop(paste0("Batch variables are redundant! Remove one or more of the "
         #"batch variables so they are no longer confounded")}
         if(ncol(design) == (n_batch+1)){
-            message <- paste0("The covariate is confounded with batch! Remove ",
-                "the covariate and rerun ComBat-Seq")
-            stop(message)
+            stop("The covariate is confounded with batch! Remove the ",
+                "covariate and rerun ComBat-Seq")
         }
         if(ncol(design)>(n_batch+1)){
             if((qr(
                 design[,-c(seq_len(n_batch))])$rank<ncol(
                     design[,-c(seq_len(n_batch))]))){
-                message <- paste0('The covariates are confounded! Please ',
-                    'remove one or more of the covariates so the design is ',
-                    'not confounded')
-                stop(message)
+                stop("The covariates are confounded! Please remove one or ",
+                    "more of the covariates so the design is not confounded")
             }else{
-                message <- paste0("At least one covariate is confounded with ",
-                    "batch! Please remove confounded covariates and rerun ", 
-                    "ComBat-Seq")
-                stop(message)}}
+                stop("At least one covariate is confounded with batch! Please ",
+                    "remove confounded covariates and rerun ComBat-Seq")}}
     }
     
     ## Check for missing values in count matrix
     NAs <- any(is.na(counts))
-    if(NAs){message(c('Found',sum(is.na(counts)),'Missing Data Values'),sep=' ')}
+    if(NAs){
+        message(c('Found',sum(is.na(counts)),'Missing Data Values'),sep=' ')
+        }
     
     
     ########  Estimate gene-wise dispersions within each batch  ########

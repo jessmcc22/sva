@@ -58,26 +58,23 @@ svaseq <- function(dat, mod, mod0 = NULL,n.sv=NULL,controls=NULL,
     vfilter=NULL,B=5, numSVmethod = "be",constant = 1) {
     method <- match.arg(method)
     if(!is.null(controls) & !is.null(vfilter)){
-        stop("sva error: if controls is provided vfilter must be NULL.\n")}
+        stop("sva: if controls is provided vfilter must be NULL.")}
     if((method=="supervised") & is.null(controls)){
-        message <- paste0("sva error: for a supervised analysis you must ",
-            "provide a vector of controls.\n")
-        stop(message)}
+        stop("sva: for a supervised analysis you must provide a vector of ",
+            "controls.")}
     if(!is.null(controls) & (method!="supervised")){
         method <- "supervised";
-        message("sva warning: controls provided, supervised sva being ",
-            "performed")
+        message("sva: controls provided, supervised sva being performed")
     }
     
-    if(any(dat < 0)){stop("svaseq error: counts must be zero or greater")}
+    if(any(dat < 0)){stop("svaseq: counts must be zero or greater")}
     dat <- log(dat + constant)
     
     
     if(!is.null(vfilter)){
         if(vfilter < 100 | vfilter > dim(dat)[1]){
-            message <- paste0("sva error: the number of genes used in the ",
-                "analysis must be between 100 and",dim(dat)[1],"\n")
-            stop(message)
+            stop("sva: the number of genes used in the analysis must be ",
+                "between 100 and", dim(dat)[1])
         }
         tmpv <- rowVars(dat)
         ind <- which(rank(-tmpv) < vfilter)

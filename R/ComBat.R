@@ -99,9 +99,8 @@ ComBat <- function(dat, batch, mod = NULL, par.prior = TRUE,
     if (!is.null(ref.batch)){
         ## check for reference batch, check value, and make appropriate changes
         if (!(ref.batch%in%levels(batch))) {
-            message <- paste0("reference level ref.batch is not one of the ",
-                "levels of the batch variable")
-            stop(message)
+            stop("reference level ref.batch is not one of the levels of the ",
+                "batch variable")
         }
         message("Using batch =",
             ref.batch, "as a reference batch (this batch won't change)")
@@ -145,22 +144,17 @@ ComBat <- function(dat, batch, mod = NULL, par.prior = TRUE,
         #stop("Batch variables are redundant! Remove one or more of the
         #batch variables so they are no longer confounded")}
         if(ncol(design)==(n.batch+1)) {
-            message <- paste0("The covariate is confounded with batch! Remove ",
+            stop("The covariate is confounded with batch! Remove ",
                 "the covariate and rerun ComBat")
-            stop(message)
         }
         if(ncol(design)>(n.batch+1)) {
             if((qr(design[,-c(seq_len(n.batch))])$rank<ncol(
                 design[,-c(seq_len(n.batch))]))){
-                message <- paste0("The covariates are confounded! Please ",
-                    "remove one or more of the covariates so the design is ",
-                    "not confounded")
-                stop(message)
+                stop("The covariates are confounded! Please remove one or ",
+                    "more of the covariates so the design is not confounded")
             } else {
-                message <- paste0("At least one covariate is confounded with ", 
-                    "batch! Please remove confounded covariates and rerun ",
-                    "ComBat")
-                stop(message)
+                stop("At least one covariate is confounded with batch! Please ",
+                    "remove confounded covariates and rerun ComBat")
             }
         }
     }

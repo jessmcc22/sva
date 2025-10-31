@@ -55,10 +55,8 @@ read.degradation.matrix <- function(covFiles,
     
     if(length(covFiles) != length(sampleNames) & 
             type %in% c("bwtool", "region_matrix_single")){
-        message <- paste0("Must provide one coverage file and sample name per ",
-            "sample for 'bwtool' or 'region_matrix_single' types")
-        stop(message)
-        
+        stop("Must provide one coverage file and sample name per sample for ",
+            "'bwtool' or 'region_matrix_single' types")
     } 
     
     ## read in data
