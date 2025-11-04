@@ -53,36 +53,32 @@ read.degradation.matrix <- function(covFiles,
     
     type <- match.arg(type)
     
-    if(length(covFiles) != length(sampleNames) & 
-            type %in% c("bwtool", "region_matrix_single")){
+    if(length(covFiles) != length(sampleNames) & type %in% 
+            c("bwtool", "region_matrix_single")){
         stop("Must provide one coverage file and sample name per sample for ",
             "'bwtool' or 'region_matrix_single' types")
     } 
     
     ## read in data
     if(type == "bwtool") { # bwtool output
-        degCov <- bplapply(covFiles, 
-            read.delim,
-            as.is = TRUE,
-            colClasses = c(rep("NULL",9), "numeric"),
-            header = TRUE,
-            BPPARAM = BPPARAM)
+        degCov <- bplapply(covFiles, read.delim, as.is = TRUE, header = TRUE,
+            colClasses = c(rep("NULL",9), "numeric"), BPPARAM = BPPARAM)
         degCovMat <- do.call("cbind",degCov)
         colnames(degCovMat) <- sampleNames
     } else if(type == "region_matrix_single") { # region w/ manifest
-        degCov <- bplapply(covFiles, read.delim,
-            as.is=TRUE,header=TRUE,row.names=1,BPPARAM=BPPARAM)
-        degCov <- lapply(degCov,as.numeric)
-        degCovMat <- do.call("cbind",degCov)
+        degCov <- bplapply(covFiles, read.delim, as.is = TRUE, header = TRUE,
+                        row.names = 1, BPPARAM = BPPARAM)
+        degCov <- lapply(degCov, as.numeric)
+        degCovMat <- do.call("cbind", degCov)
         colnames(degCovMat) <- sampleNames
     } else if(type == "region_matrix_all") { # region w/ individual file
-        degCov <- read.delim(covFiles, as.is=TRUE,row.names=1)
+        degCov <- read.delim(covFiles, as.is = TRUE, row.names = 1)
         degCovMat <- t(as.matrix(degCov))
         colnames(degCovMat) <- sampleNames
-    } else stop("type must be 'bwtool',
-        'region_matrix_single',
-        'region_matrix_all'")
-    
+    } else {
+        stop("type must be 'bwtool', 'region_matrix_single', or ",
+            "'region_matrix_all'")
+    }
     
     ## normalize for library size and read length
     degCovMat <- degCovMat/readLength # read length
@@ -91,6 +87,5 @@ read.degradation.matrix <- function(covFiles,
         nrow = nrow(degCovMat), byrow=TRUE)
     degCovAdj <- degCovMat/bg
     
-    # return
     return(degCovAdj)
 }

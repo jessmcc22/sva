@@ -48,16 +48,17 @@
 #' @export
 #' 
 
-sva <- function(dat, mod, mod0 = NULL,n.sv=NULL,controls=NULL,
-    method=c("irw","two-step","supervised"),
-    vfilter=NULL,B=5, numSVmethod = "be") {
+sva <- function(dat, mod, mod0 = NULL, n.sv=NULL, controls=NULL,
+    method = c("irw", "two-step", "supervised"), vfilter = NULL, B = 5,
+    numSVmethod = "be") {
     method <- match.arg(method)
+    
     if(!is.null(controls) & !is.null(vfilter)){
-        stop("sva: if control(s) is/are provided vfilter must be NULL.")}
-    if((method=="supervised") & is.null(controls)){
+        stop("sva: if control(s) is/are provided vfilter must be NULL.")
+    }else if((method=="supervised") & is.null(controls)){
         stop("sva: for a supervised analysis you must provide a vector ",
-        "of controls.")}
-    if(!is.null(controls) & (method!="supervised")){
+        "of controls.")
+    }else if(!is.null(controls) & (method!="supervised")){
         method  <-  "supervised"; 
         message("sva: controls provided, supervised sva being performed")
     }
@@ -76,9 +77,7 @@ sva <- function(dat, mod, mod0 = NULL,n.sv=NULL,controls=NULL,
         warning("Returning zero surrogate variables as requested")
         return(list(sv=matrix(nrow=ncol(dat), ncol=0),
             pprob.gam = rep(0, nrow(dat)), pprob.b=NULL, n.sv=0))
-    }
-    
-    if(is.null(n.sv)){
+    }else if(is.null(n.sv)){
         n.sv <- num.sv(dat,mod,method=numSVmethod,vfilter=vfilter)
     }
     
@@ -87,11 +86,9 @@ sva <- function(dat, mod, mod0 = NULL,n.sv=NULL,controls=NULL,
         
         if(method=="two-step"){
             return(twostepsva.build(dat=dat, mod=mod,n.sv=n.sv))
-        }
-        if(method=="irw"){
+        }else if(method=="irw"){
             return(irwsva.build(dat=dat, mod=mod, mod0 = mod0,n.sv=n.sv,B=B))
-        }
-        if(method=="supervised"){
+        }else if(method=="supervised"){
             return(ssva(dat,controls,n.sv))
         }
     }else{
