@@ -1,5 +1,5 @@
     ########  Preparation  ######## 
-    preparation <- function(batch, counts){
+preparation <- function(batch, counts){
     ## Does not support 1 sample per batch yet
     batch <- as.factor(batch)
     if(any(table(batch)<=1)){
