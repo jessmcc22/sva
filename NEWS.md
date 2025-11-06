@@ -1,6 +1,6 @@
 # Version 3.35.4
 ## Major Changes
-* changed package name to ComBat
+* changed package name to ComBatSuite
 
 # Version 3.35.3
 ## Major Changes

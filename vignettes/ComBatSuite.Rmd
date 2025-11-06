@@ -1,6 +1,6 @@
 ---
-title: "The ComBat package for removing batch effects and other unwanted variation 
-  in high-throughput experiments"
+title: "The ComBatSuite package for removing batch effects and other unwanted
+  variation in high-throughput experiments"
 author:
 - name: Jeffrey Leek
   affiliation: 
@@ -25,29 +25,29 @@ author:
   affiliation: 
   - Division of Infectious Disease, Department of Medicine, Rutgers University 
   email: anderson.jessica@rutgers.edu
-package: ComBat
+package: ComBatSuite
 output:
   BiocStyle::html_document
 bibliography:
-    "ComBat.bib"
+    "ComBatSuite.bib"
 vignette: |
-    %\VignetteIndexEntry{ComBat tutorial}
+    %\VignetteIndexEntry{ComBatSuite tutorial}
     %\VignetteKeywords{Gene expression data, RNA-seq, batch effects}
-    %\VignettePackage{ComBat}
+    %\VignettePackage{ComBatSuite}
     %\VignetteEncoding{UTF-8}
     %\VignetteEngine{knitr::rmarkdown}
 ---
 
 # Overview
-The `ComBat` package contains functions for removing batch effects and
+The `ComBatSuite` package contains functions for removing batch effects and
 other unwanted variation in high-throughput experiments. Specifically, the 
-`ComBat` package contains functions for identifying and building surrogate 
+`ComBatSuite` package contains functions for identifying and building surrogate 
 variables for high-dimensional data sets. Surrogate variables are covariates
 constructed directly from high-dimensional data (like gene expression/RNA
 sequencing/methylation/brain imaging data) that can be used in subsequent
 analyses to adjust for unknown, unmodeled, or latent sources of noise. 
 
-The `ComBat` package can be used to remove artifacts in two ways:
+The `ComBatSuite` package can be used to remove artifacts in two ways:
 
 1. Identifying and estimating surrogate variables for unknown sources of 
 variation in high-throughput experiments
@@ -62,7 +62,7 @@ experiments was run on Monday and another set on Tuesday, if two technicians
 were responsible for different subsets of the experiments, or if two different
 lots of reagents, chips or instruments were used.
 
-The `ComBat` package includes the popular ComBat [@johnson:2007aa]
+The `ComBatSuite` package includes the popular ComBat [@johnson:2007aa]
 function for directly modeling batch effects when they are known. There are
 also potentially a large number of environmental and biological variables that
 are unmeasured and may have a large impact on measurements from high-throughput
@@ -75,11 +75,11 @@ have been shown to reduce dependence, stabilize error rate estimates, and
 improve reproducibility (see @leek:storey:2007; @leek:storey:2008 @leek:2010aa
 for more detailed information).
 
-This document provides a tutorial for using the `ComBat` package. The 
+This document provides a tutorial for using the `ComBatSuite` package. The 
 tutorial includes information on:
 
 1. How to estimate the number of latent sources of variation
-2. How to apply the`ComBat` package to estimate latent variables such as 
+2. How to apply the`ComBatSuite` package to estimate latent variables such as 
 batch effects
 3. How to directly remove known batch effects using the `ComBat`
 function
@@ -96,7 +96,7 @@ loaded from the `bladderbatch` data package. The relevant packages for
 the Vignette can be loaded with the code:
 
 ```{R Load Packages and Data, results='hide', message=FALSE, warning=FALSE}
-library(ComBat)
+library(ComBatSuite)
 library(bladderbatch)
 library(pamr)
 library(limma)
@@ -106,11 +106,11 @@ data(bladderdata)
 
 # Setting up the data
 
-The first step in using the `ComBat` package is to properly format the
+The first step in using the `ComBatSuite` package is to properly format the
 data and create appropriate model matrices. The data should be a matrix with
 features (genes, transcripts, voxels) in the rows and samples in the columns.
 This is the typical genes by samples matrix found in gene expression analyses.
-The `ComBat` package assumes there are two types of variables that are
+The `ComBatSuite` package assumes there are two types of variables that are
 being considered: (1) adjustment variables and (2) variables of interest. 
 For example, in a gene expression study the variable of interest might be an
 indicator of cancer versus control. The adjustment variables could be the age of
@@ -233,7 +233,7 @@ variables.
 #Adjusting for surrogate variables using the `limma` package
 
 The `limma` package is one of the most commonly used packages for
-differential expression analysis. The `ComBat` package can easily be used 
+differential expression analysis. The `ComBatSuite` package can easily be used 
 in conjunction with the `limma` package to perform adjusted 
 differential expression analysis. The first step in this process is to fit the
 linear model with the surrogate variables included.
@@ -570,11 +570,11 @@ this example, we simply set `controls[i] = TRUE` for all control genes and
 
 # What to cite
 
-The ComBat package includes multiple different methods created by different faculty
-and students. It would really help them out if you would cite their work when 
-you use this software. 
+The ComBatSuite package includes multiple different methods created by different
+faculty and students. It would really help them out if you would cite their work
+when you use this software. 
 
-To cite the overall ComBat package cite: 
+To cite the overall ComBatSuite package cite: 
 
 * Leek JT, Johnson WE, Parker HS, Jaffe AE, and Storey JD. (2012) The sva 
 package for removing batch effects and other unwanted variation in
@@ -593,7 +593,7 @@ For ComBat please cite:
 * Johnson WE, Li C, Rabinovic A (2007) Adjusting batch effects in microarray 
 expression data using empirical Bayes methods. Biostatistics,  8 (1), 118-127
 
-For mean-only or reference-batch combat please cite:
+For mean-only or reference-batch ComBat please cite:
 
 * Zhang, Y., Jenkins, D. F., Manimaran, S., Johnson, W. E. (2018). Alternative
 empirical Bayes models for adjusting for batch effects in genomic studies. BMC

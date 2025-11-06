@@ -8,7 +8,7 @@ modefunc <- function(x) {
 }
 
 mono <- function(lfdr){
-    .Call("monotone", as.numeric(lfdr), PACKAGE="sva")
+    .Call("monotone", as.numeric(lfdr), PACKAGE="ComBatSuite")
 }
 
 edge.lfdr <- function(p, trunc = TRUE, monotone = TRUE, 

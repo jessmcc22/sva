@@ -1,4 +1,4 @@
 library(testthat)
-library(ComBat)
+library(ComBatSuite)
 
-test_check("ComBat")
+test_check("ComBatSuite")

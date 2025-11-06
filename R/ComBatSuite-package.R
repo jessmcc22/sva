@@ -1,19 +1,20 @@
-#' ComBat: a package for removing artifacts from microarray and sequencing data 
+#' ComBatSuite: a package for removing artifacts from microarray/sequencing data
 #'
-#' ComBat has functionality to estimate and remove artifacts from high dimensional
-#' data the \code{\link{sva}} function can be used to estimate artifacts from
-#' microarray data the \code{\link{svaseq}} function can be used to estimate
-#' artifacts from count-based RNA-sequencing (and other sequencing) data. The
-#' \code{\link{ComBat}} function can be used to remove known batch effecs from
-#' microarray data. The \code{\link{fsva}} function can be used to remove batch
-#' effects for prediction problems. 
+#' ComBatSuite has functionality to estimate and remove artifacts from high 
+#' dimensional data the \code{\link{sva}} function can be used to estimate
+#' artifacts from microarray data the \code{\link{svaseq}} function can be used
+#' to estimate artifacts from count-based RNA-sequencing (and other sequencing)
+#' data. The \code{\link{ComBat}} function can be used to remove known batch
+#' effecs from microarray data. The \code{\link{fsva}} function can be used to
+#' remove batch effects for prediction problems. 
 #' 
 #' 
-#' A vignette is available: type \code{browseVignettes("ComBat")} in the R prompt
+#' A vignette is available: type \code{browseVignettes("ComBatSuite")} in the
+#' R prompt
 #' 
 #' @references For the package: Leek JT, Johnson WE, Parker HS, Jaffe AE, and 
-#'   Storey JD. (2012) The ComBat package for removing batch effects and other 
-#'   unwanted variation in high-throughput experiments. Bioinformatics 
+#'   Storey JD. (2012) The ComBatSuite package for removing batch effects and
+#'   other unwanted variation in high-throughput experiments. Bioinformatics 
 #'   DOI:10.1093/bioinformatics/bts034
 #' @references For sva: Leek JT and Storey JD. (2008) A general framework for 
 #'   multiple testing dependence. Proceedings of the National Academy of 
@@ -36,11 +37,11 @@
 #' 
 #' @author Jeffrey T. Leek, W. Evan Johnson, Hilary S. Parker, Andrew E. Jaffe,
 #'   John D. Storey, Yuqing Zhang
-#' @name ComBat
+#' @name ComBatSuite
 #' 
 #' @import genefilter
 #' @import mgcv
 #' @rawNamespace import(matrixStats, except = c(rowSds, rowVars))
 #' 
-#' @useDynLib ComBat, .registration = TRUE
+#' @useDynLib ComBatSuite, .registration = TRUE
 NULL

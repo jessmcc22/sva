@@ -1,4 +1,4 @@
-library(ComBat)
+library(ComBatSuite)
 library(testthat)
 context("ComBat Error Check")
 

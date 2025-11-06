@@ -1,5 +1,5 @@
 # Tests the ComBat output in the bladder batch dataset
-library(ComBat)
+library(ComBatSuite)
 library(bladderbatch)
 data(bladderdata)
 library(testthat)

@@ -25,11 +25,11 @@
 #' data(bladderdata)
 #' dat <- bladderEset[1:5000,]
 #' 
-#' pheno = pData(dat)
-#' edata = exprs(dat)
-#' mod = model.matrix(~as.factor(cancer), data=pheno)
+#' pheno <- pData(dat)
+#' edata <- exprs(dat)
+#' mod <- model.matrix(~as.factor(cancer), data=pheno)
 #' 
-#' n.sv = num.sv(edata,mod,method="leek")
+#' n.sv <- num.sv(edata,mod,method="leek")
 #' 
 #' @export
 #' 
