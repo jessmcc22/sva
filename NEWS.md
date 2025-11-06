@@ -1,3 +1,7 @@
+# Version 3.35.4
+## Major Changes
+* changed package name to ComBat
+
 # Version 3.35.3
 ## Major Changes
 * set.seed() removed from num.sv

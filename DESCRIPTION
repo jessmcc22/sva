@@ -1,4 +1,4 @@
-Package: sva
+Package: ComBat
 Title: Surrogate Variable Analysis
 Version: 3.35.3
 Date: 2025-10-15
@@ -18,15 +18,15 @@ Authors@R: c(
     person("Leonardo", "Collado Torres", , "lcolladotor@gmail.com",
     role = c("aut"))
     )
-Description: The sva package contains functions for removing batch
+Description: The ComBat package contains functions for removing batch
     effects and other unwanted variation in high-throughput
-    experiment. Specifically, the sva package contains functions
+    experiment. Specifically, the ComBat package contains functions
     for the identifying and building surrogate variables for
     high-dimensional data sets. Surrogate variables are covariates
     constructed directly from high-dimensional data (like gene
     expression/RNA sequencing/methylation/brain imaging data) that
     can be used in subsequent analyses to adjust for unknown,
-    unmodeled, or latent sources of noise. The sva package can be
+    unmodeled, or latent sources of noise. The ComBat package can be
     used to remove artifacts in three ways: (1) identifying and
     estimating surrogate variables for unknown sources of variation
     in high-throughput experiments (Leek and Storey 2007 PLoS
@@ -39,8 +39,8 @@ Description: The sva package contains functions for removing batch
     reproducibility, see (Leek and Storey 2007 PLoS Genetics, 2008
     PNAS or Leek et al. 2011 Nat. Reviews Genetics).
 License: Artistic-2.0
-URL: https://github.com/jessmcc22/sva
-BugReports: https://github.com/jessmcc22/sva/issues
+URL: https://github.com/jessmcc22/ComBat
+BugReports: https://github.com/jessmcc22/ComBat/issues
 Depends:
     R (>= 4.5.0),
     mgcv,

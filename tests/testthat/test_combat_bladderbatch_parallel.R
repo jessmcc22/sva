@@ -1,5 +1,5 @@
 # Tests the ComBat output in the bladder batch dataset
-library(sva)
+library(ComBat)
 library(BiocParallel)
 library(bladderbatch)
 data(bladderdata)

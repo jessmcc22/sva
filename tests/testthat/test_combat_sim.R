@@ -1,4 +1,4 @@
-library(sva)
+library(ComBat)
 library(testthat)
 context("ComBat test on simulated data")
 

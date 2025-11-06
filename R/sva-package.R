@@ -1,6 +1,6 @@
-#' sva: a package for removing artifacts from microarray and sequencing data 
+#' ComBat: a package for removing artifacts from microarray and sequencing data 
 #'
-#' sva has functionality to estimate and remove artifacts from high dimensional
+#' ComBat has functionality to estimate and remove artifacts from high dimensional
 #' data the \code{\link{sva}} function can be used to estimate artifacts from
 #' microarray data the \code{\link{svaseq}} function can be used to estimate
 #' artifacts from count-based RNA-sequencing (and other sequencing) data. The
@@ -9,10 +9,10 @@
 #' effects for prediction problems. 
 #' 
 #' 
-#' A vignette is available: type \code{browseVignettes("sva")} in the R prompt
+#' A vignette is available: type \code{browseVignettes("ComBat")} in the R prompt
 #' 
 #' @references For the package: Leek JT, Johnson WE, Parker HS, Jaffe AE, and 
-#'   Storey JD. (2012) The sva package for removing batch effects and other 
+#'   Storey JD. (2012) The ComBat package for removing batch effects and other 
 #'   unwanted variation in high-throughput experiments. Bioinformatics 
 #'   DOI:10.1093/bioinformatics/bts034
 #' @references For sva: Leek JT and Storey JD. (2008) A general framework for 
@@ -21,7 +21,7 @@
 #' @references For sva: Leek JT and Storey JD. (2007) Capturing heterogeneity 
 #'   in gene expression studies by `Surrogate Variable Analysis'. PLoS Genetics,
 #'   3: e161.
-#' @references For Combat: Johnson WE, Li C, Rabinovic A (2007) Adjusting batch
+#' @references For ComBat: Johnson WE, Li C, Rabinovic A (2007) Adjusting batch
 #'   effects in microarray expression data using empirical Bayes methods.
 #'   Biostatistics,  8 (1), 118-127
 #' @references For svaseq: Leek JT (2014) svaseq: removing batch and other
@@ -36,11 +36,11 @@
 #' 
 #' @author Jeffrey T. Leek, W. Evan Johnson, Hilary S. Parker, Andrew E. Jaffe,
 #'   John D. Storey, Yuqing Zhang
-#' @name sva
+#' @name ComBat
 #' 
 #' @import genefilter
 #' @import mgcv
 #' @rawNamespace import(matrixStats, except = c(rowSds, rowVars))
 #' 
-#' @useDynLib sva, .registration = TRUE
+#' @useDynLib ComBat, .registration = TRUE
 NULL

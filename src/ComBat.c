@@ -29,13 +29,13 @@ R_CallMethodDef callMethods[]  = {
   {NULL, NULL, 0}
 };
 
-void R_init_sva(DllInfo *info)
+void R_init_ComBat(DllInfo *info)
 {
      R_registerRoutines(info, NULL, callMethods, NULL, NULL);
     R_useDynamicSymbols(info, FALSE);
 }
      
-void R_unload_sva(DllInfo *info)
+void R_unload_ComBat(DllInfo *info)
 {
     (void) info;
 }

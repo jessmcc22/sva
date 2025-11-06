@@ -1,4 +1,4 @@
 library(testthat)
-library(sva)
+library(ComBat)
 
-test_check("sva")
+test_check("ComBat")
