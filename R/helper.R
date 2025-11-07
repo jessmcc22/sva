@@ -1,3 +1,15 @@
+zero_surrogate_check <- function(num.sv, function_name){
+    if(function_name == "num.sv" & num.sv < 1){
+        warning("The function num.sv has not detected any surrogate ",
+            "varaiables. Any downstream functions will continue with ",
+            num.sv, " estimated surrogate variables.")
+    }else if(num.sv < 1){
+        warning("You are using ", num.sv, " surrogate variables. This may ",
+            "cause unpredictability in ", function_name, ".")
+    }
+    return()
+}
+
 sva.class2Model <- function(classes) {
     return(model.matrix(~factor(classes)))
 }

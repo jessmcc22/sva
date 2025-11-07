@@ -29,13 +29,15 @@
 #' edata <- exprs(dat)
 #' mod <- model.matrix(~as.factor(cancer), data=pheno)
 #' 
-#' n.sv <- num.sv(edata,mod,method="leek")
+#' n.sv <- num.sv(edata, mod, method="be")
 #' res <- irwsva.build(edata, mod, mod0 = NULL, n.sv, B = 5) 
 #' 
 #' @export
 #' 
 
 irwsva.build <- function(dat, mod, mod0 = NULL, n.sv, B = 5) {
+    
+    zero_surrogate_check(n.sv, "irwsva.build")
     
     n <- ncol(dat)
     m <- nrow(dat)
@@ -61,7 +63,7 @@ irwsva.build <- function(dat, mod, mod0 = NULL, n.sv, B = 5) {
         ptmp <- f.pvalue(dat,mod.b,mod0.b)
         pprob.b <- (1-edge.lfdr(ptmp))
         
-        mod.gam <- cbind(mod0,uu$vectors[,1:n.sv])
+        mod.gam <- cbind(mod0,uu$vectors[,seq_len(n.sv)])
         mod0.gam <- cbind(mod0)
         ptmp <- f.pvalue(dat,mod.gam,mod0.gam)
         pprob.gam <- (1-edge.lfdr(ptmp))

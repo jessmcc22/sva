@@ -23,7 +23,7 @@
 #' edata <- exprs(dat)
 #' mod <- model.matrix(~as.factor(cancer), data=pheno)
 #' 
-#' n.sv <- num.sv(edata,mod,method="leek")
+#' n.sv <- num.sv(edata,mod,method="be")
 #' pcontrol <- empirical.controls(edata,mod,mod0=NULL,n.sv=n.sv,type="norm")
 #' 
 #' @export
@@ -31,6 +31,9 @@
 
 empirical.controls <- function(dat, mod, mod0 = NULL, n.sv, B = 5, 
                                 type = c("norm","counts")) {
+    
+    zero_surrogate_check(n.sv, "empirical.controls")
+    
     type <- match.arg(type)
     if((type=="counts") & any(dat < 0)){
         stop("empirical controls: counts must be zero or greater")

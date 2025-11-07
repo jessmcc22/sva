@@ -29,7 +29,7 @@
 #' edata <- exprs(dat)
 #' mod <- model.matrix(~as.factor(cancer), data=pheno)
 #' 
-#' n.sv <- num.sv(edata,mod,method="leek")
+#' n.sv <- num.sv(edata,mod,method="be")
 #' 
 #' @export
 #' 
@@ -79,6 +79,7 @@ num.sv <- function(dat, mod,method=c("be","leek"),vfilter=NULL,B=20,seed=NULL){
         finish <- which.max(ss*c(rep(0,start),rep(1,100-start)) > ss[1])
         if(finish==1){finish <- 100}
         n.sv <- modefunc(rhat[start:finish,10])
+        zero_surrogate_check(n.sv, "num.sv")
         return(n.sv)
     }
 }
