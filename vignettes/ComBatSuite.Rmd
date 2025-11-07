@@ -599,6 +599,12 @@ For mean-only or reference-batch ComBat please cite:
 empirical Bayes models for adjusting for batch effects in genomic studies. BMC
 bioinformatics, 19 (1), 262.
 
+For Combat-Seq please cite:
+
+* Zhang, Y., Parmigiani, G., Johnson, W. E., ComBat-seq: batch effect adjustment
+for RNA-seq count data, NAR Genomics and Bioinformatics, Volume 2, Issue 3,
+September 2020, lqaa078, https://doi.org/10.1093/nargab/lqaa078
+
 For svaseq please cite: 
 
 * Leek JT (2014) svaseq: removing batch and other artifacts from count-based
