@@ -30,7 +30,8 @@ various versions.
 To install the most up-to-date version of ComBatSuite, please install directly
 from github. You will need the devtools package. You can install both of these
 with the following commands:
-```{R, eval = FALSE}
+
+``` r
 if (!require("devtools", quietly = TRUE)) {
     install.packages("devtools")   
 }
