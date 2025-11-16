@@ -1,6 +1,6 @@
 Package: ComBatSuite
 Title: Surrogate Variable Analysis
-Version: 3.35.3
+Version: 3.35.4
 Date: 2025-10-15
 Authors@R: c(
     person("Jessica", "Anderson", , "anderson.jessica@rutgers.edu", 
@@ -16,6 +16,8 @@ Authors@R: c(
     person("John D.", "Storey", , "jstorey@princeton.edu",
     role = c("aut", "fnd")), 
     person("Leonardo", "Collado Torres", , "lcolladotor@gmail.com",
+    role = c("aut")),
+    person("Junmin", "Wang", , "jmwang.bio@gmail.com",
     role = c("aut"))
     )
 Description: The ComBatSuite package contains functions for removing batch
@@ -31,7 +33,9 @@ Description: The ComBatSuite package contains functions for removing batch
     estimating surrogate variables for unknown sources of variation
     in high-throughput experiments (Leek and Storey 2007 PLoS
     Genetics,2008 PNAS), (2) directly removing known batch
-    effects using ComBat (Johnson et al. 2007 Biostatistics) and (3) removing
+    effects using ComBat (Johnson et al. 2007 Biostatistics),
+    ComBat-seq (Zhang et al. 2020 NAR Genom. Bioinform.), and
+    ComBat-met (Wang 2025 NAR Genom. Bioinform.) and (3) removing
     batch effects with known control probes (Leek 2014 biorXiv).
     Removing batch effects and using surrogate variables in
     differential expression analysis have been shown to reduce
@@ -53,7 +57,9 @@ Imports:
     matrixStats,
     methods,
     stats,
-    utils
+    utils,
+    betareg,
+    parallel
 Suggests:
     BiocStyle,
     bladderbatch,
@@ -65,6 +71,6 @@ VignetteBuilder:
     knitr
 biocViews: BatchEffect, GeneExpression, GenomicVariation, ImmunoOncology, 
     Microarray, MultipleComparison, Normalization, Regression, RNASeq, 
-    StatisticalMethod, Sequencing, Preprocessing
+    StatisticalMethod, Sequencing, Preprocessing, DNAMethylation, mRNAMicroarray
 RoxygenNote: 7.3.3
 Encoding: UTF-8

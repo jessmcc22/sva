@@ -832,8 +832,8 @@ monte_carlo_int_beta <- function(
 #' @param mean.only Logical indicating whether to apply mean-only correction
 #' @return Batch-adjusted matrix matching input dimensions
 #' @noRd
-adjust_data <- function(vmatOri, dtype, keep, bv, params, adjusted_params, 
-                        batches_ind, mean.only) {
+adjust_data_met <- function(vmatOri, dtype, keep, bv, params, adjusted_params, 
+                            batches_ind, mean.only) {
     gamma_star_mat <- adjusted_params$gamma_star_mat
     delta_star_mat <- adjusted_params$delta_star_mat
     mu_hat_mat <- params$mu_hat_mat

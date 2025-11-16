@@ -106,8 +106,8 @@ ComBat_met <- function(
         ncores, mean.only, ref.batch, ref)
     
     # Adjust the data
-    adj_vmat <- adjust_data(vmatOri, dtype, keep, bv, params, adjusted_params,
-                            batches_ind, mean.only)
+    adj_vmat <- adjust_data_met(vmatOri, dtype, keep, bv, params, 
+                                adjusted_params, batches_ind, mean.only)
     
     return(adj_vmat)
 }
