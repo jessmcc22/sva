@@ -110,3 +110,10 @@ For psva please cite:
 Fertig EJ (2014) Preserving biological heterogeneity with a permuted surrogate
 variable analysis for genomics batch correction Bioinformatics doi:
 10.1093/bioinformatics/btu375
+
+#### ComBat-met method
+For ComBat-met please cite:
+
+* Wang J (2025) ComBat-met: adjusting batch effects in DNA methylation 
+data. NAR Genomics and Bioinformatics, 7 (2), lqaf062. 
+doi: 10.1093/nargab/lqaf062
