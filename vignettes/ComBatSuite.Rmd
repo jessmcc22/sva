@@ -410,7 +410,7 @@ group <- rep(c(0, 1), 4)
 The `ComBat_met` function takes a beta-value or M-value matrix, 
 a batch vector, and an optional group vector as input.
 
-```{R Run ComBat-met, results = "hide}
+```{R Run ComBat-met, results = "hide"}
 adj_bv_mat <- ComBat_met(bv_mat, batch = batch, group = group, full_mod = TRUE)
 ```
 
@@ -418,7 +418,7 @@ For large-scale projects, it is useful to adjust batch effects relative to a
 reference batch. `ComBat_met` provides this capability through 
 the `ref.batch` parameter.
 
-```{R Run ComBat-met with a Reference Batch, results = "hide}
+```{R Run ComBat-met with a Reference Batch, results = "hide"}
 adj_bv_mat <- ComBat_met(
     bv_mat, batch = batch, group = group, full_mod = TRUE, ref.batch = 1)
 ```
@@ -427,7 +427,7 @@ Real-world methylation datasets tend to be high-dimensional. To speed up the
 computation, `ComBat_met` provides an option to parallelize the 
 batch correction process.
 
-```{R Run ComBat-met Using Multiple Cores, results = "hide}
+```{R Run ComBat-met Using Multiple Cores, results = "hide"}
 adj_bv_mat <- ComBat_met(
     bv_mat, batch = batch, group = group, full_mod = TRUE, ncores = 2)
 ```

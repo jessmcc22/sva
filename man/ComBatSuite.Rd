@@ -10,7 +10,9 @@ artifacts from microarray data the \code{\link{svaseq}} function can be used
 to estimate artifacts from count-based RNA-sequencing (and other sequencing)
 data. The \code{\link{ComBat}} function can be used to remove known batch
 effecs from microarray data. The \code{\link{fsva}} function can be used to
-remove batch effects for prediction problems.
+remove batch effects for prediction problems. The \code{\link{ComBat_met}}
+function can be used to remove known batch effects from DNA methylation
+data.
 }
 \details{
 A vignette is available: type \code{browseVignettes("ComBatSuite")} in the
@@ -45,6 +47,10 @@ For psva: Parker HS, Leek JT, Favorov AV, Considine M, Xia X,
   Chavan S, Chung CH, Fertig EJ (2014) Preserving biological heterogeneity
  with a permuted surrogate variable analysis for genomics batch correction
  Bioinformatics doi: 10.1093/bioinformatics/btu375
+
+For ComBat_met: Wang J (2025) ComBat-met: adjusting batch 
+  effects in DNA methylation data. NAR Genomics and Bioinformatics, 7 (2), 
+  lqaf062. doi: 10.1093/nargab/lqaf062
 }
 \author{
 Jeffrey T. Leek, W. Evan Johnson, Hilary S. Parker, Andrew E. Jaffe,
