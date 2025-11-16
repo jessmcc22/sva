@@ -1,6 +1,6 @@
 # Version 3.35.4
 ## Major Changes
-* changed package name to ComBatSuite
+* Added ComBat_met and Mvalue_ComBat to ComBatSuite
 
 # Version 3.35.3
 ## Major Changes
